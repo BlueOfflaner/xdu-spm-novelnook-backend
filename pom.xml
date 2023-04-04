@@ -14,6 +14,7 @@
         <module>nook-api</module>
         <module>nook-thirdware</module>
         <module>nook-material</module>
+        <module>nook-gateway</module>
     </modules>
 
 

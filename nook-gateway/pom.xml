@@ -10,5 +10,5 @@
         <relativePath>../nook-api/pom.xml</relativePath>
     </parent>
 
-    <artifactId>nook-thirdware</artifactId>
+    <artifactId>nook-gateway</artifactId>
 </project>

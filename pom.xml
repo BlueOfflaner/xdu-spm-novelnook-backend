@@ -12,6 +12,8 @@
     <modules>
         <module>nook-user</module>
         <module>nook-api</module>
+        <module>nook-thirdware</module>
+        <module>nook-material</module>
     </modules>
 
 
@@ -20,4 +22,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
+
+
 </project>

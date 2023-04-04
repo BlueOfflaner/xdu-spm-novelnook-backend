@@ -1,4 +1,4 @@
-package utils;
+package com.xdu.nook.api.utils;
 
 import org.apache.http.HttpStatus;
 

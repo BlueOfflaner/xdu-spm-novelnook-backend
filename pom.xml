@@ -15,6 +15,7 @@
         <module>nook-thirdware</module>
         <module>nook-material</module>
         <module>nook-gateway</module>
+        <module>nook-message</module>
     </modules>
 
 

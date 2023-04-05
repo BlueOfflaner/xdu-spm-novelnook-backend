@@ -16,6 +16,7 @@
         <module>nook-material</module>
         <module>nook-gateway</module>
         <module>nook-message</module>
+        <module>nook-authserver</module>
     </modules>
 
 

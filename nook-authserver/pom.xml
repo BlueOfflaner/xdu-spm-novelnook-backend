@@ -9,12 +9,8 @@
         <version>SNAP-SHOT-V1.0</version>
         <relativePath>../nook-api/pom.xml</relativePath>
     </parent>
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    <artifactId>nook-gateway</artifactId>
+    <artifactId>nook-authserver</artifactId>
+    <version>SNAP-SHOT-V1.0</version>
+
+
 </project>

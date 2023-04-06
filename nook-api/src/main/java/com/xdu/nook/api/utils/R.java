@@ -60,6 +60,7 @@ public class R extends HashMap<String, Object> {
         r.put("data",data);
         return r;
     }
+
     public static R ok(Map<String, Object> map) {
         R r = new R();
         r.put("code",ECode.OK);
@@ -69,10 +70,17 @@ public class R extends HashMap<String, Object> {
     }
 
 
+
+    public static R ok(){
+        return new R();
+    }
+
     public R put(String key, Object value) {
         super.put(key, value);
         return this;
     }
+
+
 //    public  Integer getCode() {
 //        return (Integer) this.get("code");
 //    }

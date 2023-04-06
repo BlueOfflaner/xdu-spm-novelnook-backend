@@ -13,9 +13,9 @@ import java.io.IOException;
 public class RedissonConfig {
     @Bean
     public RedissonClient redissonClient() throws IOException {
-        Config config=new Config();
+        Config config = new Config();
         config.useSingleServer().setAddress("redis://192.168.163.130:6379");
-        RedissonClient redissonClient=Redisson.create(config);
-        return  redissonClient;
+        RedissonClient redissonClient = Redisson.create(config);
+        return redissonClient;
     }
 }

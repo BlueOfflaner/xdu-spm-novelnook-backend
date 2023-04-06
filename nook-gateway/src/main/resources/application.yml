@@ -23,6 +23,12 @@ spring:
           filters:
             - RewritePath=/api/auth/(?<segment>.*),/$\{segment}
 
+        - id: user
+          uri: lb://nook-user
+          predicates:
+            - Path=/api/user/**
+          filters:
+            - RewritePath=/api/user/(?<segment>.*),/$\{segment}
 logging:
   level:
     root: info

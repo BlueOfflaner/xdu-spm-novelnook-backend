@@ -1,6 +1,6 @@
 package com.xdu.nook.api.utils;
 
-import com.xdu.nook.api.constant.ECode;
+import com.xdu.nook.api.constant.ERCode;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -20,23 +20,24 @@ public class R extends HashMap<String, Object> {
      *      "code":"001100",
      *      "msg":"这是一个实例信息"
      *  }
+     *
      * @author: violet
      */
     public R() {
-        put("code", 0);
+        put("code", "00000");
         put("msg", "success");
     }
 
 
     public static R error() {
-        return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, "未知异常，请联系管理员");
+        return error(new Integer(HttpStatus.SC_INTERNAL_SERVER_ERROR).toString(), "未知异常，请联系管理员");
     }
 
     public static R error(String msg) {
-        return error(HttpStatus.SC_INTERNAL_SERVER_ERROR, msg);
+        return error(new Integer(HttpStatus.SC_INTERNAL_SERVER_ERROR).toString(), msg);
     }
 
-    public static R error(int code, String msg) {
+    public static R error(String code, String msg) {
         R r = new R();
         r.put("code", code);
         r.put("msg", msg);
@@ -45,33 +46,34 @@ public class R extends HashMap<String, Object> {
 
     public static R ok(Object data) {
         R r = new R();
-        r.put("code",ECode.OK);
+        r.put("code", ERCode.OK.getCode());
         r.put("data", data);
         return r;
     }
-    public static R ok(String msg){
 
-        return new R().put("msg",msg).put("code",ECode.OK);
+    public static R ok(String msg) {
+
+        return new R().put("msg", msg).put("code", ERCode.OK.getCode());
     }
-    public static R ok(String msg,Object data) {
+
+    public static R ok(String msg, Object data) {
         R r = new R();
-        r.put("code",ECode.OK);
+        r.put("code", ERCode.OK.getCode());
         r.put("msg", msg);
-        r.put("data",data);
+        r.put("data", data);
         return r;
     }
 
     public static R ok(Map<String, Object> map) {
         R r = new R();
-        r.put("code",ECode.OK);
-        r.put("msg","");
+        r.put("code", ERCode.OK.getCode());
+        r.put("msg", "");
         r.putAll(map);
         return r;
     }
 
 
-
-    public static R ok(){
+    public static R ok() {
         return new R();
     }
 

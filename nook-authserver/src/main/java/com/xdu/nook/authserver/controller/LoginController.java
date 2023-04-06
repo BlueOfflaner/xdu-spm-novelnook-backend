@@ -7,6 +7,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -19,13 +20,18 @@ public class LoginController {
     StringRedisTemplate redisTemplate;
 
     @GetMapping("/get-code")
-    public R sendCode(@RequestParam String to) {
+    public R sendCode(String to) {
         String code = (String) sendCodeService.send(to).get("data");
         log.info(code);
         String s = "login:code:" +
                 to;
         log.info(s);
-        redisTemplate.opsForValue().set(s, code);
+
+        String res_user_code = redisTemplate.opsForValue().get(s);
+        if(null == res_user_code){
+            redisTemplate.opsForValue().set(s, code,60, TimeUnit.SECONDS);
+        }
+
         String ret_msg = "成功向" + to + "发送验证码";
         return R.ok(ret_msg);
     }

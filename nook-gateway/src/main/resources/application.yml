@@ -21,7 +21,7 @@ spring:
           predicates:
             - Path=/api/auth/**
           filters:
-            - RewritePath=/api/(?<segment>.*),/$\{segment}
+            - RewritePath=/api/auth/(?<segment>.*),/$\{segment}
 
 logging:
   level:

@@ -1,4 +1,4 @@
-package com.xdu.gateway.config;
+package com.xdu.nook.gateway.config;
 
 
 import org.springframework.context.annotation.Bean;

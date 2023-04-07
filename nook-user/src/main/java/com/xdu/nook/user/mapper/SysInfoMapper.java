@@ -2,6 +2,7 @@ package com.xdu.nook.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xdu.nook.user.entity.SysInfo;
+import org.apache.ibatis.annotations.Mapper;
 
 
 /**
@@ -10,6 +11,7 @@ import com.xdu.nook.user.entity.SysInfo;
 * @createDate 2023-04-06 21:46:35
 * @Entity com.xdu.nook.user.entity.SysInfo
 */
+@Mapper
 public interface SysInfoMapper extends BaseMapper<SysInfo> {
 
 

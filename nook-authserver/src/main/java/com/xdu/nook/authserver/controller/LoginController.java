@@ -34,8 +34,6 @@ public class LoginController {
 
         String res_user_code = redisTemplate.opsForValue().get(s);
 
-        System.out.println(res_user_code);
-        log.info(res_user_code);
 
         if (null == res_user_code) {
             String code = (String) sendCodeService.send(to).get("data");

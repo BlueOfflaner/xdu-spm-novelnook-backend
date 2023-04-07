@@ -11,4 +11,5 @@ import com.xdu.nook.user.entity.SysInfo;
 */
 public interface SysInfoService extends IService<SysInfo> {
 
+    public SysInfo getSysInfoByEmail(String email);
 }

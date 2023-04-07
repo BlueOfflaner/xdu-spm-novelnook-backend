@@ -1,6 +1,7 @@
 package com.xdu.nook.user.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.service.SysInfoService;
@@ -14,5 +15,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysInfoServiceImpl extends ServiceImpl<SysInfoMapper, SysInfo> implements SysInfoService {
-
+    public SysInfo getSysInfoByEmail(String email) {
+        LambdaQueryWrapper<SysInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(email != null, SysInfo::getEmail, email);
+        SysInfo sysInfo = this.getOne(queryWrapper);
+        return sysInfo;
+    }
 }

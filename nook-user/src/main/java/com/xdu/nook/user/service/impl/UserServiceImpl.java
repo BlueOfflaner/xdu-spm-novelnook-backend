@@ -1,11 +1,22 @@
 package com.xdu.nook.user.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xdu.nook.user.entity.BaseInfo;
+import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.entity.User;
+import com.xdu.nook.user.mapper.BaseInfoMapper;
+import com.xdu.nook.user.mapper.SysInfoMapper;
+import com.xdu.nook.user.service.BaseInfoService;
+import com.xdu.nook.user.service.SysInfoService;
 import com.xdu.nook.user.service.UserService;
 import com.xdu.nook.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.sql.Date;
 
 /**
  * @author 21145
@@ -16,13 +27,46 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
 
+    @Resource
+    SysInfoService sysInfoService;
+
+    @Resource
+    BaseInfoService baseInfoService;
     /**
      * 判断某一邮箱对应用户是否已经存在，若不存在，则创建新user，入库
      * @param email 这表明，需要判断的对象是一个邮箱
      */
-    @Override
+    @Transactional
     public void welcomeUser(String email) {
+        SysInfo sysInfo = sysInfoService.getSysInfoByEmail(email);
+
+        if(sysInfo == null) {
+            sysInfo = new SysInfo();
+            sysInfo.setEmail(email);
+            Date time= new java.sql.Date(new java.util.Date().getTime());
+            sysInfo.setCreateTime(time);
+            sysInfo.setUpdateTime(time);
+            sysInfoService.save(sysInfo);
+
+            User user = new User();
+            user.setCreateTime(time);
+            user.setUpdateTime(time);
+            user.setSysInfoId(sysInfo.getId());
+            sysInfo.setUserId(user.getId());
+            this.save(user);
+
+            BaseInfo baseInfo = new BaseInfo();
+            baseInfo.setUserId(user.getId());
+            baseInfoService.save(baseInfo);
+
+            sysInfo.setUserId(user.getId());
+            sysInfoService.updateById(sysInfo);
+            user.setBaseInfoId(baseInfo.getId());
+            this.updateById(user);
+        }
 
     }
+
+
 
 }

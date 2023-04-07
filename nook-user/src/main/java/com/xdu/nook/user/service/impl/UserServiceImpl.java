@@ -8,15 +8,12 @@ import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.entity.User;
 import com.xdu.nook.user.mapper.BaseInfoMapper;
 import com.xdu.nook.user.mapper.SysInfoMapper;
-import com.xdu.nook.user.service.BaseInfoService;
-import com.xdu.nook.user.service.SysInfoService;
 import com.xdu.nook.user.service.UserService;
 import com.xdu.nook.user.mapper.UserMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * @author 21145
@@ -28,45 +25,48 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         implements UserService {
 
     @Resource
-    SysInfoService sysInfoService;
+    SysInfoMapper sysInfoMapper;
 
     @Resource
-    BaseInfoService baseInfoService;
+    BaseInfoMapper baseInfoMapper;
     /**
      * 判断某一邮箱对应用户是否已经存在，若不存在，则创建新user，入库
      * @param email 这表明，需要判断的对象是一个邮箱
      */
-    @Transactional
     public void welcomeUser(String email) {
-        SysInfo sysInfo = sysInfoService.getSysInfoByEmail(email);
+        SysInfo sysInfo = getSysInfoByEmail(email);
 
         if(sysInfo == null) {
             sysInfo = new SysInfo();
             sysInfo.setEmail(email);
-            Date time= new java.sql.Date(new java.util.Date().getTime());
-            sysInfo.setCreateTime(time);
-            sysInfo.setUpdateTime(time);
-            sysInfoService.save(sysInfo);
-
-            User user = new User();
-            user.setCreateTime(time);
-            user.setUpdateTime(time);
-            user.setSysInfoId(sysInfo.getId());
-            sysInfo.setUserId(user.getId());
-            this.save(user);
+            sysInfo.setCreateTime(new Date(System.currentTimeMillis()));
+            sysInfo.setUpdateTime(new Date(System.currentTimeMillis()));
+            sysInfoMapper.insert(sysInfo);
 
             BaseInfo baseInfo = new BaseInfo();
-            baseInfo.setUserId(user.getId());
-            baseInfoService.save(baseInfo);
+            baseInfoMapper.insert(baseInfo);
+
+            User user = new User();
+            user.setCreateTime(new Date(System.currentTimeMillis()));
+            user.setUpdateTime(new Date(System.currentTimeMillis()));
+            user.setSysInfoId(sysInfo.getId());
+            user.setBaseInfoId(baseInfo.getId());
+            this.save(user);
 
             sysInfo.setUserId(user.getId());
-            sysInfoService.updateById(sysInfo);
-            user.setBaseInfoId(baseInfo.getId());
-            this.updateById(user);
+            sysInfoMapper.updateById(sysInfo);
+            baseInfo.setUserId(user.getId());
+            baseInfoMapper.updateById(baseInfo);
         }
 
     }
 
-
+    @Override
+    public SysInfo getSysInfoByEmail(String email) {
+        LambdaQueryWrapper<SysInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(email != null, SysInfo::getEmail, email);
+        SysInfo sysInfo = sysInfoMapper.selectOne(queryWrapper);
+        return sysInfo;
+    }
 
 }

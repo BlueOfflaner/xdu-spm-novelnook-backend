@@ -2,7 +2,6 @@ package com.xdu.nook.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xdu.nook.api.utils.R;
-import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.entity.User;
 
 
@@ -14,6 +13,4 @@ import com.xdu.nook.user.entity.User;
 public interface UserService extends IService<User> {
 
     public void welcomeUser(String email);
-
-    public SysInfo getSysInfoByEmail(String email);
 }

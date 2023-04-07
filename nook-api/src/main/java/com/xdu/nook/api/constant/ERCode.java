@@ -1,8 +1,19 @@
 package com.xdu.nook.api.constant;
 
 public enum ERCode {
+    /**
+     * 一切正常
+     */
     OK("OK","00000"),
-    PARAM_ERR("PARAM_ERROR","A1000");
+    /**
+     * 请求参数错误
+     */
+    PARAM_ERR("PARAM_ERROR","A1000"),
+
+    /**
+     * 验证码错误
+     */
+    VERTIF_CODE_ERR("VERTIF_CODE_ERR","A1001");
     private String item;
     private String code;
 

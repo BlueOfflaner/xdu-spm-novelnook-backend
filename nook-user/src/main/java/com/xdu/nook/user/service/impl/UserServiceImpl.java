@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.sql.Date;
+import java.util.Date;
+
 
 /**
  * @author 21145
@@ -43,14 +44,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if(sysInfo == null) {
             sysInfo = new SysInfo();
             sysInfo.setEmail(email);
-            Date time= new java.sql.Date(new java.util.Date().getTime());
-            sysInfo.setCreateTime(time);
-            sysInfo.setUpdateTime(time);
+            Date time= new Date();
             sysInfoService.save(sysInfo);
 
             User user = new User();
-            user.setCreateTime(time);
-            user.setUpdateTime(time);
             user.setSysInfoId(sysInfo.getId());
             sysInfo.setUserId(user.getId());
             this.save(user);
@@ -63,6 +60,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             sysInfoService.updateById(sysInfo);
             user.setBaseInfoId(baseInfo.getId());
             this.updateById(user);
+        }else{
+
         }
 
     }

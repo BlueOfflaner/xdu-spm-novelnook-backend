@@ -15,5 +15,5 @@ public interface UserService extends IService<User> {
 
     public void welcomeUser(String email);
 
-    public SysInfo getSysInfoByEmail(String email);
+
 }

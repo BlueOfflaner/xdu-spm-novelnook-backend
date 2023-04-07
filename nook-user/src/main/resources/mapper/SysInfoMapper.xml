@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdu.nook.user.mapper.SysInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.xdu.nook.user.entity.SysInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="permission" column="permission" jdbcType="INTEGER"/>
+            <result property="email" column="email" jdbcType="VARCHAR"/>
+            <result property="password" column="password" jdbcType="VARCHAR"/>
+            <result property="isAvailable" column="is_available" jdbcType="TINYINT"/>
+            <result property="maxReservationNum" column="max_reservation_num" jdbcType="INTEGER"/>
+            <result property="usedReservationNum" column="used_reservation_num" jdbcType="INTEGER"/>
+            <result property="maxHoldNum" column="max_hold_num" jdbcType="INTEGER"/>
+            <result property="usedHoldNum" column="used_hold_num" jdbcType="INTEGER"/>
+            <result property="lateFee" column="late_fee" jdbcType="DECIMAL"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,user_id,permission,
+        email,password,is_available,
+        max_reservation_num,used_reservation_num,max_hold_num,
+        used_hold_num,late_fee,create_time,
+        update_time
+    </sql>
+</mapper>

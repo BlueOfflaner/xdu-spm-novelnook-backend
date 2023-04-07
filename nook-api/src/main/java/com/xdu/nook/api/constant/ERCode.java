@@ -1,15 +1,14 @@
 package com.xdu.nook.api.constant;
 
 public enum ERCode {
-    OK("OK","000000"),
-    PARAM_ERR("PARAM_ERROR","A10000");
+    OK("OK","00000"),
+    PARAM_ERR("PARAM_ERROR","A1000");
     private String item;
     private String code;
 
     ERCode(String item,String code) {
         this.code=code;
         this.item=item;
-
     }
 
     public String getItem() {

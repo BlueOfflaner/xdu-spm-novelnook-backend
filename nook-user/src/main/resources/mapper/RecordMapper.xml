@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdu.nook.user.mapper.RecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.xdu.nook.user.entity.Record">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="borrowInfoId" column="borrow_info_id" jdbcType="BIGINT"/>
+            <result property="userId" column="user_id" jdbcType="BIGINT"/>
+            <result property="callNumber" column="call_number" jdbcType="VARCHAR"/>
+            <result property="beginTime" column="begin_time" jdbcType="TIMESTAMP"/>
+            <result property="dueTime" column="due_time" jdbcType="TIMESTAMP"/>
+            <result property="returnTime" column="return_time" jdbcType="TIMESTAMP"/>
+            <result property="isActive" column="is_active" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,borrow_info_id,user_id,
+        call_number,begin_time,due_time,
+        return_time,is_active
+    </sql>
+</mapper>

@@ -1,6 +1,7 @@
 package com.xdu.nook.user.service.impl;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xdu.nook.user.entity.BaseInfo;
 import com.xdu.nook.user.service.BaseInfoService;
@@ -16,4 +17,11 @@ import org.springframework.stereotype.Service;
 public class BaseInfoServiceImpl extends ServiceImpl<BaseInfoMapper, BaseInfo>
 implements BaseInfoService{
 
+    @Override
+    public BaseInfo getBaseInfoByUserId(Long userId) {
+        LambdaQueryWrapper<BaseInfo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(userId != null, BaseInfo::getUserId, userId);
+        BaseInfo baseInfo = this.getOne(queryWrapper);
+        return baseInfo;
+    }
 }

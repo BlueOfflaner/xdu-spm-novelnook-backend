@@ -3,6 +3,8 @@ package com.xdu.nook.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fasterxml.jackson.databind.ser.Serializers;
+import com.xdu.nook.user.dto.UserBaseInfoDto;
 import com.xdu.nook.user.entity.BaseInfo;
 import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.entity.User;
@@ -38,21 +40,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      * @param email 这表明，需要判断的对象是一个邮箱
      */
     @Transactional
-    public void welcomeUser(String email) {
+    public UserBaseInfoDto welcomeUser(String email) {
         SysInfo sysInfo = sysInfoService.getSysInfoByEmail(email);
 
-        if(sysInfo == null) {
+        BaseInfo baseInfo = new BaseInfo();
+
+        if(null == sysInfo) {
             sysInfo = new SysInfo();
             sysInfo.setEmail(email);
-            Date time= new Date();
             sysInfoService.save(sysInfo);
 
             User user = new User();
             user.setSysInfoId(sysInfo.getId());
-            sysInfo.setUserId(user.getId());
             this.save(user);
 
-            BaseInfo baseInfo = new BaseInfo();
+            //BaseInfo baseInfo = new BaseInfo();
             baseInfo.setUserId(user.getId());
             baseInfoService.save(baseInfo);
 
@@ -60,12 +62,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             sysInfoService.updateById(sysInfo);
             user.setBaseInfoId(baseInfo.getId());
             this.updateById(user);
-        }else{
-
         }
 
+        baseInfo = baseInfoService.getBaseInfoByUserId(sysInfo.getUserId());
+        UserBaseInfoDto userBaseInfoDto = new UserBaseInfoDto();
+        packUserBaseInfoDto(userBaseInfoDto, baseInfo, sysInfo);
+        return userBaseInfoDto;
     }
 
+    @Override
+    public User getUserBySysInfo(SysInfo sysInfo) {
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(sysInfo.getUserId() != null, User::getId, sysInfo.getUserId());
+        User user = this.getOne(queryWrapper);
+        return user;
+    }
 
-
+    private void packUserBaseInfoDto(UserBaseInfoDto userBaseInfoDto, BaseInfo baseInfo, SysInfo sysInfo) {
+        userBaseInfoDto.setId(sysInfo.getUserId());
+        userBaseInfoDto.setUKIDCode(baseInfo.getUkIdCode());
+        userBaseInfoDto.setName(baseInfo.getName());
+        userBaseInfoDto.setBirthday(baseInfo.getBirthday());
+        userBaseInfoDto.setEmail(sysInfo.getEmail());
+    }
 }

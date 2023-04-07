@@ -11,4 +11,5 @@ import com.xdu.nook.user.entity.BaseInfo;
 */
 public interface BaseInfoService extends IService<BaseInfo> {
 
+    public BaseInfo getBaseInfoByUserId(Long userId);
 }

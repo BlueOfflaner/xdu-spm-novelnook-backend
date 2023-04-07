@@ -14,9 +14,17 @@ public class AgentController {
 
     @Resource
     UserService userService;
+    @ResponseBody
     @GetMapping("welcome/{email}")
-    public R welcomeUser(@PathVariable String email){
+    public UserBaseInfoDto welcomeUser(@PathVariable String email){
         UserBaseInfoDto userBaseInfoDto = userService.welcomeUser(email);
-        return R.ok(userBaseInfoDto);
+        return userBaseInfoDto;
+    }
+
+    @ResponseBody
+    @GetMapping("/get-user-info")
+    public R getOneUser(){
+
+        return R.error();
     }
 }

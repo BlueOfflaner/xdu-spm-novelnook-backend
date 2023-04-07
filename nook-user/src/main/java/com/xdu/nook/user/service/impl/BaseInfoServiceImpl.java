@@ -9,7 +9,7 @@ import com.xdu.nook.user.mapper.BaseInfoMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* @author 21145
+* @author violet
 * @description 针对表【base_info】的数据库操作Service实现
 * @createDate 2023-04-06 21:51:11
 */

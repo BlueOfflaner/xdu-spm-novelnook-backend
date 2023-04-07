@@ -10,13 +10,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserBaseInfoDto {
-    public Long id;
+    private Long id;
 
-    public String UKIDCode;
+    private String UKIDCode;
 
-    public String name;
-    public Date Birthday;
+    private String name;
+    private Date Birthday;
 
-    public String email;
+    private String email;
 
 }

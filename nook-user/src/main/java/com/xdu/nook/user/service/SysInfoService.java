@@ -5,7 +5,7 @@ import com.xdu.nook.user.entity.SysInfo;
 
 
 /**
-* @author 21145
+* @author violet
 * @description 针对表【sys_info】的数据库操作Service
 * @createDate 2023-04-06 21:46:35
 */

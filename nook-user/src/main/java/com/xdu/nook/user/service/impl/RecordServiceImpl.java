@@ -8,7 +8,7 @@ import com.xdu.nook.user.mapper.RecordMapper;
 import org.springframework.stereotype.Service;
 
 /**
-* @author 21145
+* @author violet
 * @description 针对表【record】的数据库操作Service实现
 * @createDate 2023-04-06 21:51:11
 */

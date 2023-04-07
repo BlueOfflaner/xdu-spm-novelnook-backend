@@ -2,6 +2,7 @@ package com.xdu.nook.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xdu.nook.user.entity.BaseInfo;
+import com.xdu.nook.user.vo.BaseInfoVo;
 
 
 /**
@@ -12,4 +13,6 @@ import com.xdu.nook.user.entity.BaseInfo;
 public interface BaseInfoService extends IService<BaseInfo> {
 
     public BaseInfo getBaseInfoByUserId(Long userId);
+
+    public void initBaseInfo(BaseInfoVo baseInfoVo);
 }

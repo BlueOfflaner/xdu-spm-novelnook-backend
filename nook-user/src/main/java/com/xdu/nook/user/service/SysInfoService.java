@@ -2,6 +2,9 @@ package com.xdu.nook.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xdu.nook.user.entity.SysInfo;
+import com.xdu.nook.user.vo.UserInfoVo;
+
+import java.util.List;
 
 
 /**
@@ -12,4 +15,11 @@ import com.xdu.nook.user.entity.SysInfo;
 public interface SysInfoService extends IService<SysInfo> {
 
     public SysInfo getSysInfoByEmail(String email);
+
+    void modifyStatus(Long userId, Integer permission, Integer isAvailable);
+
+    SysInfo getSysInfoByUserId(Long userId);
+
+    void modifyStatusBulk(List<UserInfoVo> userInfoVoList);
+
 }

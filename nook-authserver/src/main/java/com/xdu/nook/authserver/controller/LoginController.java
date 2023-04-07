@@ -4,9 +4,12 @@ import com.xdu.nook.api.constant.ERCode;
 import com.xdu.nook.api.constant.RedisIndex;
 import com.xdu.nook.api.utils.R;
 
+import com.xdu.nook.authserver.dto.UserBaseInfoDto;
+import com.xdu.nook.authserver.feign.UserClient;
 import com.xdu.nook.authserver.service.SendCodeService;
 import com.xdu.nook.authserver.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +29,9 @@ public class LoginController {
     SendCodeService sendCodeService;
     @Resource(name = "stringRedisTemplate")
     StringRedisTemplate redisTemplate;
+
+    @Resource
+    UserClient userClient;
 
     @GetMapping("/get-code")
     public R sendCode(String to) {
@@ -55,12 +61,15 @@ public class LoginController {
         } else {
             if (code.equals(realCode)) {
                 //TODO 此处需要重新设计token生成方案
-                UserInfoVo userinfo = new UserInfoVo();
-                userinfo.setToken("612729200104055712");
-                userinfo.setName("IsabellaViolet");
-                userinfo.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("2001-04-05"));
-
-                return R.ok("登录成功", userinfo);
+//                UserInfoVo userinfo = new UserInfoVo();
+//                userinfo.setToken("612729200104055712");
+//                userinfo.setName("IsabellaViolet");
+//                userinfo.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("2001-04-05"));
+                UserBaseInfoDto userBaseInfoDto = userClient.welcomeUser(email);
+                UserInfoVo userInfoVo = new UserInfoVo();
+                BeanUtils.copyProperties(userBaseInfoDto,userInfoVo);
+                userInfoVo.setToken("612729200104055712");
+                return R.ok("登录成功", userInfoVo);
             } else {
                 return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getItem());
             }

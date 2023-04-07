@@ -15,7 +15,7 @@ public class UserBaseInfoDto {
     public String UKIDCode;
 
     public String name;
-    public Date Birthday;
+    public Date birthday;
 
     public String email;
 

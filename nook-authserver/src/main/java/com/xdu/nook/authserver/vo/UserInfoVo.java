@@ -17,6 +17,6 @@ public class UserInfoVo {
     public String UKIDCode;
 
     public String name;
-    public Date Birthday;
+    public Date birthday;
 
 }

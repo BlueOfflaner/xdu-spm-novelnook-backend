@@ -39,7 +39,6 @@ public class LoginController {
             String code = (String) sendCodeService.send(to).get("data");
             redisTemplate.opsForValue().set(s, code, 60, TimeUnit.SECONDS);
         }
-
         String ret_msg = "成功向" + to + "发送验证码";
         return R.ok(ret_msg);
     }
@@ -66,6 +65,5 @@ public class LoginController {
                 return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getItem());
             }
         }
-
     }
 }

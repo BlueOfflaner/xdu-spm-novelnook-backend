@@ -21,20 +21,13 @@ public class IsbnSearchServiceImpl implements IsbnSearchService {
     @Override
     public IsbnInfoEntity ISBNOnlineSearch(String isbn){
         IsbnInfoEntity isbnInfoEntity = isbnSearchClient.searchIsbn(isbn);
-        System.out.println(isbnInfoEntity);
-        /*
-        if(null == isbnInfoEntity){
-            return R.error(ERCode.SEARCH_ISBN_ERR.getCode(),ERCode.SEARCH_ISBN_ERR.getMsg());
-        }else {
-            return R.ok(isbnInfoEntity);
-        }
-        */
         return isbnInfoEntity;
     }
 
     @Override
     public IsbnInfoEntity ISBNSearch(String isbn){
         LambdaQueryWrapper<IsbnInfoEntity> queryWrapper=new LambdaQueryWrapper<>();
+
 
         queryWrapper.eq(null!=isbn,IsbnInfoEntity::getIsbn13,isbn)
                 .or(queryWrapperBefore->{

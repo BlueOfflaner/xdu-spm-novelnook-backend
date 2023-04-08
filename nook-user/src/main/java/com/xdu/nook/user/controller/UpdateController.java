@@ -32,7 +32,7 @@ public class UpdateController {
     @PutMapping("/modify-status")
     public R modifyStatus(@RequestParam(name = "id") Long userId,
                           @RequestParam(name = "permission") Integer permission,
-                          @RequestParam(name = "isavailable") Integer isAvailable) {
+                          @RequestParam(name = "isAvailable") Integer isAvailable) {
         if(null == userId) {
             return R.error();
         }

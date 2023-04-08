@@ -35,11 +35,11 @@ public class AgentController {
     }
 
     @GetMapping("/get-user-info-list")
-    public R getUserInfoList(@RequestParam(name = "pagesize") Integer pageSize,
-                             @RequestParam(name = "currentpage") Integer currentPage) {
+    public R getUserInfoList(@RequestParam(name = "pageSize") Integer pageSize,
+                             @RequestParam(name = "currentPage") Integer currentPage) {
         Page page = userService.getUserInfoList(pageSize, currentPage);
-        //page.getRecords().forEach(System.out::println);
         return R.ok(page);
+        //page.getRecords().forEach(System.out::println);
     }
 
     @GetMapping("/get-user-info-all")

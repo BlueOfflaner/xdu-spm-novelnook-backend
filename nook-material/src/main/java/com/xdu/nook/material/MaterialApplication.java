@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @EnableFeignClients
 @EnableDiscoveryClient
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication()
 public class MaterialApplication {
     public static void main(String[] args){
         SpringApplication.run(MaterialApplication.class, args);

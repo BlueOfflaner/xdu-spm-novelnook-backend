@@ -1,22 +1,25 @@
 package com.xdu.nook.material.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import lombok.Data;
 
 /**
  * @TableName isbn_info
  */
+@TableName(value ="isbn_info")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class IsbnInfoEntity implements Serializable {
+    @TableId(type = IdType.AUTO)
     private Long id;
 
+    @TableField("isbn_10")
     private String isbn10;
 
+    @TableField("isbn_13")
     private String isbn13;
 
     private String title;

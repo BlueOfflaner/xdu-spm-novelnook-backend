@@ -2,6 +2,7 @@ package com.xdu.nook.user.service.impl;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.xdu.nook.user.dto.UserBaseInfoDto;
@@ -14,11 +15,15 @@ import com.xdu.nook.user.service.BaseInfoService;
 import com.xdu.nook.user.service.SysInfoService;
 import com.xdu.nook.user.service.UserService;
 import com.xdu.nook.user.mapper.UserMapper;
+import com.xdu.nook.user.vo.UserInfoVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -35,6 +40,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     @Resource
     BaseInfoService baseInfoService;
+
+    @Resource
+    UserMapper userMapper;
     /**
      * 判断某一邮箱对应用户是否已经存在，若不存在，则创建新user，入库
      * @param email 这表明，需要判断的对象是一个邮箱
@@ -70,7 +78,52 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return userBaseInfoDto;
     }
 
-    @Override
+    public UserInfoVo getOneUser(Long id) {
+        User user = this.getById(id);
+        if(null == user) {
+            return null;
+        }
+        BaseInfo baseInfo = baseInfoService.getById(user.getBaseInfoId());
+        SysInfo sysInfo = sysInfoService.getById(user.getSysInfoId());
+
+        UserInfoVo userInfoVo = new UserInfoVo();
+        packUserInfoVo(userInfoVo, baseInfo, sysInfo);
+
+        return userInfoVo;
+    }
+
+    public List<UserInfoVo> getUserInfoAll() {
+        List<UserInfoVo> userInfoVoList = userMapper.getUserInfoAll();
+
+        //userList.forEach(user -> {
+        //    UserInfoVo userInfoVo = getOneUser(user.getId());
+        //    userInfoVoList.add(userInfoVo);
+        //});
+
+        return userInfoVoList;
+    }
+
+    public Page getUserInfoList(Integer pageSize, Integer currentPage) {
+        Page<User> userPage = new Page<>(currentPage, pageSize);
+        //this.page(userPage, null);
+        userMapper.selectPage(userPage, null);
+
+        Page<UserInfoVo> userInfoVoPage = new Page<>();
+        BeanUtils.copyProperties(userPage, userInfoVoPage, "records");
+
+        List<User> userList = userPage.getRecords();
+        List<UserInfoVo> userInfoVoList = new ArrayList<>();
+
+        userList.forEach(user -> {
+            UserInfoVo userInfoVo = getOneUser(user.getId());
+            userInfoVoList.add(userInfoVo);
+        });
+
+        userInfoVoPage.setRecords(userInfoVoList);
+
+        return userInfoVoPage;
+    }
+
     public User getUserBySysInfo(SysInfo sysInfo) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(sysInfo.getUserId() != null, User::getId, sysInfo.getUserId());
@@ -84,5 +137,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         userBaseInfoDto.setName(baseInfo.getName());
         userBaseInfoDto.setBirthday(baseInfo.getBirthday());
         userBaseInfoDto.setEmail(sysInfo.getEmail());
+    }
+
+    private void packUserInfoVo(UserInfoVo userInfoVo, BaseInfo baseInfo, SysInfo sysInfo) {
+        BeanUtils.copyProperties(sysInfo, userInfoVo);
+        BeanUtils.copyProperties(baseInfo, userInfoVo);
     }
 }

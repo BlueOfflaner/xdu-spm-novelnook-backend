@@ -17,4 +17,34 @@
         id,base_info_id,sys_info_id,
         borrow_info_id,create_time,update_time
     </sql>
+
+    <select id="getUserInfoAll" resultMap="userInfoVoMap">
+        select
+            base_info.uk_id_code, base_info.name, base_info.birthday, sys_info.*
+        from
+            user, base_info, sys_info
+        where
+            base_info.user_id = user.id
+        and
+            sys_info.user_id = user.id;
+    </select>
+    
+    <resultMap id="userInfoVoMap" type="com.xdu.nook.user.vo.UserInfoVo">
+        <result property="UKIDCode" column="uk_id_code"></result>
+        <result property="name" column="name"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="id" column="id"></result>
+        <result property="userId" column="user_id"></result>
+        <result property="permission" column="permission"></result>
+        <result property="email" column="email"></result>
+        <result property="password" column="password"></result>
+        <result property="isAvailable" column="is_available"></result>
+        <result property="maxReservationNum" column="max_reservation_num"></result>
+        <result property="usedReservationNum" column="used_reservation_num"></result>
+        <result property="maxHoldNum" column="max_hold_num"></result>
+        <result property="usedHoldNum" column="used_hold_num"></result>
+        <result property="lateFee" column="late_fee"></result>
+        <result property="createTime" column="create_time"></result>
+        <result property="updateTime" column="update_time"></result>
+    </resultMap>
 </mapper>

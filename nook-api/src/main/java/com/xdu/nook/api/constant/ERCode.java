@@ -13,21 +13,26 @@ public enum ERCode {
     /**
      * 验证码错误
      */
-    VERTIF_CODE_ERR("VERTIF_CODE_ERR","A1001");
-    private String item;
+    VERTIF_CODE_ERR("VERTIF_CODE_ERR","B1001"),
+
+    /**
+     * isbn查询失败
+     */
+    SEARCH_ISBN_ERR("SEARCH_ISBN_ERR","C1001");
+    private String msg;
     private String code;
 
-    ERCode(String item,String code) {
+    ERCode(String msg, String code) {
         this.code=code;
-        this.item=item;
+        this.msg = msg;
     }
 
-    public String getItem() {
-        return item;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public String getCode() {

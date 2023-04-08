@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -54,10 +52,10 @@ public class LoginController {
     public R testRegist(@RequestBody HashMap<String, String> request) throws ParseException {
         String email = request.get("email");
         String code = request.get("code");
-        if (code == null || email == null) R.error(ERCode.PARAM_ERR.getCode(), ERCode.PARAM_ERR.getItem());
+        if (code == null || email == null) R.error(ERCode.PARAM_ERR.getCode(), ERCode.PARAM_ERR.getMsg());
         String realCode = redisTemplate.opsForValue().get(RedisIndex.LOGIN_CODE + email);
         if (null == realCode) {
-            return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getItem());
+            return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getMsg());
         } else {
             if (code.equals(realCode)) {
                 //TODO 此处需要重新设计token生成方案
@@ -71,7 +69,7 @@ public class LoginController {
                 userInfoVo.setToken("612729200104055712");
                 return R.ok("登录成功", userInfoVo);
             } else {
-                return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getItem());
+                return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getMsg());
             }
         }
     }

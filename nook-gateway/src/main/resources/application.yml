@@ -29,6 +29,13 @@ spring:
             - Path=/api/user/**
           filters:
             - RewritePath=/api/user/(?<segment>.*),/$\{segment}
+        - id: material
+          uri: lb://nook-material
+          predicates:
+            - Path=/api/material/**
+          filters:
+            - RewritePath=/api/material/(?<segment>.*),/$\{segment}
+
 logging:
   level:
     root: info

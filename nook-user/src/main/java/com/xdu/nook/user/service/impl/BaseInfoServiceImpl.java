@@ -31,14 +31,11 @@ implements BaseInfoService{
     }
 
     public void initBaseInfo(BaseInfoVo baseInfoVo) {
-        BaseInfo baseInfo = this.getBaseInfoByUserId(Long.valueOf(baseInfoVo.getId()));
+        BaseInfo baseInfo = this.getBaseInfoByUserId(baseInfoVo.getId());
         baseInfo.setUkIdCode(baseInfoVo.getUkid());
         baseInfo.setName(baseInfoVo.getNickname());
-        try {
-            baseInfo.setBirthday(DateFormat.getDateInstance().parse(baseInfoVo.getBirthday()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        baseInfo.setBirthday(baseInfoVo.getBirthday());
+
         this.updateById(baseInfo);
     }
 }

@@ -38,7 +38,7 @@ public class AgentController {
     public R getUserInfoList(@RequestParam(name = "pagesize") Integer pageSize,
                              @RequestParam(name = "currentpage") Integer currentPage) {
         Page page = userService.getUserInfoList(pageSize, currentPage);
-        page.getRecords().forEach(System.out::println);
+        //page.getRecords().forEach(System.out::println);
         return R.ok(page);
     }
 

@@ -1,7 +1,7 @@
 package com.xdu.nook.material.service;
 
-import com.xdu.nook.material.entity.RecordEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xdu.nook.material.entity.RecordEntity;
 
 /**
 * @author 21145

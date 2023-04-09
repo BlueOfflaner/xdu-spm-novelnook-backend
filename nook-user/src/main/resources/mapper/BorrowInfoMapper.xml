@@ -7,7 +7,7 @@
     <resultMap id="BaseResultMap" type="com.xdu.nook.user.entity.BorrowInfo">
             <id property="id" column="id" jdbcType="BIGINT"/>
             <result property="userId" column="user_id" jdbcType="BIGINT"/>
-            <result property="recordsId" column="records_id" jdbcType="BIGINT"/>
+            <result property="recordId" column="records_id" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>

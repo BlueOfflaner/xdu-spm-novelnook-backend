@@ -18,7 +18,7 @@ public class LendInfoEntity implements Serializable {
 
     private Long materialId;
 
-    private Long records;
+    private Long recordId;
 
     private Date createTime;
 

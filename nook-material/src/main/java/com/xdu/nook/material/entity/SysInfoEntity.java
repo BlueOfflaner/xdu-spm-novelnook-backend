@@ -22,7 +22,7 @@ public class SysInfoEntity implements Serializable {
 
     private Integer isReserved;
 
-    private String callNumber;
+    private Integer bookIndex ;
 
     private Long categoryId;
 

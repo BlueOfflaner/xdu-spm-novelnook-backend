@@ -18,7 +18,7 @@ public class BorrowInfo implements Serializable {
 
     private Long userId;
 
-    private Long recordsId;
+    private Long recordId;
 
     private Date createTime;
 

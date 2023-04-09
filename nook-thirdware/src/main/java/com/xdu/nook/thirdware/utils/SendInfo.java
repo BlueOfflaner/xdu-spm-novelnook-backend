@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 public class SendInfo {
     public String to;
     public String from;
-
     public String context;
 }

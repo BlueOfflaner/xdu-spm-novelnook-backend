@@ -15,6 +15,7 @@
             <result property="image" column="image" jdbcType="VARCHAR"/>
             <result property="description" column="description" jdbcType="VARCHAR"/>
             <result property="capacity" column="capacity" jdbcType="INTEGER"/>
+            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -23,6 +24,7 @@
         id,isbn_10,isbn_13,
         title,author,publisher,
         pages,image,description,
-        capacity,create_time,update_time
+        capacity,category_id,create_time,
+        update_time
     </sql>
 </mapper>

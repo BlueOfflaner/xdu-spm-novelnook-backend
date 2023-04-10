@@ -19,8 +19,8 @@ public enum ERCode {
      * isbn查询失败
      */
     SEARCH_ISBN_ERR("SEARCH_ISBN_ERR","C1001");
-    private String msg;
-    private String code;
+    public String msg;
+    public String code;
 
     ERCode(String msg, String code) {
         this.code=code;

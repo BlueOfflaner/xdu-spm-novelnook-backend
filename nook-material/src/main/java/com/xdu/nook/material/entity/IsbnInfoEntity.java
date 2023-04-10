@@ -1,7 +1,9 @@
 package com.xdu.nook.material.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -12,6 +14,7 @@ import lombok.Data;
 @TableName(value ="isbn_info")
 @Data
 public class IsbnInfoEntity implements Serializable {
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @TableField("isbn_10")
@@ -34,10 +37,10 @@ public class IsbnInfoEntity implements Serializable {
 
     private Integer capacity;
 
-    @TableField(fill = FieldFill.INSERT)
+    private Long categoryId;
+
     private Date createTime;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;

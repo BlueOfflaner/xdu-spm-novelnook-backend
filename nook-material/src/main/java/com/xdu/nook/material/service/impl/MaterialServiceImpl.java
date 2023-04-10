@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* @author 21145
-* @description 针对表【material】的数据库操作Service实现
-* @createDate 2023-04-08 20:57:41
-*/
+ * @author 21145
+ * @description 针对表【material】的数据库操作Service实现
+ * @createDate 2023-04-10 18:42:29
+ */
 @Service
 public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, MaterialEntity>
-    implements MaterialService{
+        implements MaterialService {
 
     @Resource
     BaseInfoService baseInfoService;
@@ -35,11 +35,105 @@ public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, MaterialEnt
     CategoryService categoryService;
 
     @Resource
+    IsbnSearchService isbnSearchService;
+
+    @Resource
     LendInfoService lendInfoService;
 
     @Resource
     RecordService recordService;
 
+
+
+    public MaterialEntity getMaterialByBaseInfo(BaseInfoEntity baseInfo) {
+        if (baseInfo.getMaterialId() == null) {
+            return null;
+        }
+        return this.getById(baseInfo.getMaterialId());
+    }
+
+    public Boolean insertMaterial(String isbn_id) {
+        IsbnInfoEntity isbnInfoEntity;
+        Integer isbn=Integer.parseInt(isbn_id);
+        isbnInfoEntity = isbnSearchService.ISBNSearch(isbn);
+        if (null == isbnInfoEntity) {
+            isbnInfoEntity = isbnSearchService.ISBNOnlineSearch(isbn);
+        }
+        if (null == isbnInfoEntity) {
+            return false;
+        }
+
+        Long isbn_info_id = isbnInfoEntity.getId();
+        BaseInfoEntity baseInfoEntity = new BaseInfoEntity();
+        baseInfoEntity.setIsbnInfoId(isbn_info_id);
+        baseInfoService.save(baseInfoEntity);
+        Long baseInfoId = baseInfoEntity.getId();
+
+        MaterialEntity materialEntity=new MaterialEntity();
+        materialEntity.setBaseInfoId(baseInfoId);
+        this.save(materialEntity);
+        baseInfoEntity.setMaterialId(materialEntity.getId());
+        baseInfoService.updateById(baseInfoEntity);
+
+        SysInfoEntity sysInfoEntity=new SysInfoEntity();
+
+        sysInfoEntity.setMaterialId(materialEntity.getId());
+        //TODO 常量
+        sysInfoEntity.setIsLimited(0);
+        sysInfoEntity.setIsOccupied(0);
+        sysInfoEntity.setIsReserved(0);
+        sysInfoEntity.setBookIndex(isbnInfoEntity.getCapacity()+1);
+        sysInfoService.save(sysInfoEntity);
+
+        materialEntity.setSysInfoId(sysInfoEntity.getId());
+        this.updateById(materialEntity);
+
+        return false;
+    }
+
+    /*
+    private void packMaterialVo(MaterialVo materialVo, MaterialEntity material, List<List<CategoryEntity>> categoryList) {
+        if (material == null) {
+            return;
+        }
+
+        BaseInfoEntity baseInfo = baseInfoService.getById(material.getBaseInfoId());
+        IsbnInfoEntity isbnInfo = isbnInfoService.getById(baseInfo.getIsbnInfoId());
+        SysInfoEntity sysInfo = sysInfoService.getById(material.getSysInfoId());
+
+        //List<CategoryEntity> categoryTopList = categoryList.get(0);
+        //List<CategoryEntity> categoryMidList = categoryList.get(1);
+        //List<CategoryEntity> categoryLowList = categoryList.get(2);
+
+        List<CategoryEntity> tmpList = new ArrayList<>();
+
+        if (null != sysInfo || null != sysInfo.get()) {
+            int cnt = 2;
+            Long id = sysInfo.getCategoryId();
+            while (cnt >= 0) {
+                Long finalId = id;
+                CategoryEntity categoryEntity = categoryList.get(cnt).stream().filter(s -> s.getId().equals(finalId)).findAny().get();
+                tmpList.add(categoryEntity);
+                id = categoryEntity.getPId();
+                cnt--;
+            }
+        }
+
+        LendInfoEntity lendInfo = lendInfoService.getById(material.getLendInfoId());
+        RecordEntity record = recordService.getById(lendInfo.getRecordId());
+
+        if (null == lendInfo) {
+            lendInfo = new LendInfoEntity();
+            record = new RecordEntity();
+        }
+
+        BeanUtils.copyProperties(baseInfo, materialVo);
+        BeanUtils.copyProperties(isbnInfo, materialVo);
+        BeanUtils.copyProperties(sysInfo, materialVo);
+        materialVo.setCategoryEntityList(tmpList);
+        BeanUtils.copyProperties(lendInfo, materialVo);
+        BeanUtils.copyProperties(record, materialVo);
+    }
     public List<MaterialVo> getMaterialsByIsbn(IsbnInfoEntity isbnInfo) {
         List<BaseInfoEntity> baseInfoList = baseInfoService.getBaseInfoByIsbn(isbnInfo);
         List<MaterialVo> materialVoList = new ArrayList<>();
@@ -57,87 +151,7 @@ public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, MaterialEnt
         });
         return materialVoList;
     }
-
-    public MaterialEntity getMaterialByBaseInfo(BaseInfoEntity baseInfo) {
-        if(baseInfo.getMId() == null) {
-            return null;
-        }
-        return this.getById(baseInfo.getMId());
-    }
-
-    public void insertMaterial(MaterialVo materialVo, IsbnInfoEntity isbnInfo) {
-        BaseInfoEntity baseInfo = new BaseInfoEntity();
-        BeanUtils.copyProperties(materialVo, baseInfo);
-        if(null != isbnInfo) {
-            baseInfo.setIsbnInfoId(isbnInfo.getId());
-        }
-        baseInfoService.save(baseInfo);
-
-        isbnInfo.setCapacity(isbnInfo.getCapacity()+1);
-        isbnInfoService.save(isbnInfo);
-
-        //TODO Navigation处理
-
-
-
-        SysInfoEntity sysInfo = new SysInfoEntity();
-        BeanUtils.copyProperties(materialVo, sysInfo);
-        sysInfo.setCategoryId(materialVo.getCategoryId());
-        sysInfoService.save(sysInfo);
-
-        //TODO Category处理
-
-        MaterialEntity material = new MaterialEntity();
-        material.setSysInfoId(sysInfo.getId());
-        material.setBaseInfoId(baseInfo.getId());
-        this.save(material);
-
-        baseInfo.setMId(material.getId());
-        baseInfoService.updateById(baseInfo);
-    }
-
-    private void packMaterialVo(MaterialVo materialVo, MaterialEntity material, List<List<CategoryEntity>> categoryList) {
-        if(material == null) {
-            return;
-        }
-
-        BaseInfoEntity baseInfo = baseInfoService.getById(material.getBaseInfoId());
-        IsbnInfoEntity isbnInfo = isbnInfoService.getById(baseInfo.getIsbnInfoId());
-        SysInfoEntity sysInfo = sysInfoService.getById(material.getSysInfoId());
-
-        //List<CategoryEntity> categoryTopList = categoryList.get(0);
-        //List<CategoryEntity> categoryMidList = categoryList.get(1);
-        //List<CategoryEntity> categoryLowList = categoryList.get(2);
-
-        List<CategoryEntity> tmpList = new ArrayList<>();
-
-        if(null != sysInfo || null != sysInfo.getCategoryId()) {
-            int cnt = 2;
-            Long id = sysInfo.getCategoryId();
-            while(cnt >= 0) {
-                Long finalId = id;
-                CategoryEntity categoryEntity = categoryList.get(cnt).stream().filter(s -> s.getId().equals(finalId)).findAny().get();
-                tmpList.add(categoryEntity);
-                id = categoryEntity.getPId();
-                cnt--;
-            }
-        }
-
-        LendInfoEntity lendInfo = lendInfoService.getById(material.getLendInfoId());
-        RecordEntity record = recordService.getById(lendInfo.getRecordId());
-
-        if(null == lendInfo) {
-            lendInfo = new LendInfoEntity();
-            record = new RecordEntity();
-        }
-
-        BeanUtils.copyProperties(baseInfo, materialVo);
-        BeanUtils.copyProperties(isbnInfo, materialVo);
-        BeanUtils.copyProperties(sysInfo, materialVo);
-        materialVo.setCategoryEntityList(tmpList);
-        BeanUtils.copyProperties(lendInfo, materialVo);
-        BeanUtils.copyProperties(record, materialVo);
-    }
+    */
 }
 
 

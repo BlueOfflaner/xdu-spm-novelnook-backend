@@ -60,6 +60,7 @@ public class SearchController {
         return R.ok(pageInfo);
     }
 
+    /*
     @GetMapping("/get-materials-by-isbn")
     public R getMaterialsByIsbn(@RequestParam(name = "isbn") String isbn) {
         IsbnInfoEntity isbnInfo = isbnSearchService.ISBNSearch(isbn);
@@ -70,4 +71,5 @@ public class SearchController {
         List<MaterialVo> materialVoList = materialService.getMaterialsByIsbn(isbnInfo);
         return R.ok(materialVoList);
     }
+    */
 }

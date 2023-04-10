@@ -12,6 +12,8 @@ public class MaterialVo extends IsbnInfoEntity {
     //BaseInfo
     private String storageLocation;
 
+
+
     private Date initTime;
 
     //SysInfo

@@ -34,7 +34,6 @@ public class UpdateController {
         if(null == localSearchedRes) {
             localSearchedRes = isbnSearchService.ISBNSearch(isbnInfo.getIsbn13());
         }
-
         if(null == localSearchedRes) {
             return R.error(ERCode.SEARCH_ISBN_ERR.getCode(),ERCode.SEARCH_ISBN_ERR.getMsg());
         }
@@ -44,15 +43,8 @@ public class UpdateController {
 
     //TODO 事务控制
     @PostMapping("/insert-material")
-    public R insertMaterial(@RequestBody MaterialVo materialVo) {
-        String isbn = (materialVo.getIsbn10() == null) ? materialVo.getIsbn13() : materialVo.getIsbn10();
-        R r = materialSearchClient.searchIsbn(isbn);
-        if(r.get("code") == ERCode.SEARCH_ISBN_ERR.getCode()) {
-            return R.error(ERCode.SEARCH_ISBN_ERR.getCode(),ERCode.SEARCH_ISBN_ERR.getMsg());
-        }
-
-        IsbnInfoEntity isbnInfo = (IsbnInfoEntity) r.get("data");
-        materialService.insertMaterial(materialVo, isbnInfo);
-        return R.ok();
+    public R insertMaterial(@RequestBody String isbnid) {
+        boolean flag = materialService.insertMaterial(isbnid);
+        return flag==true? R.ok():R.error();
     }
 }

@@ -9,15 +9,15 @@
             <result property="isOccupied" column="is_occupied" jdbcType="TINYINT"/>
             <result property="isLimited" column="is_limited" jdbcType="TINYINT"/>
             <result property="isReserved" column="is_reserved" jdbcType="TINYINT"/>
-            <result property="bookIndex" column="book_index" jdbcType="VARCHAR"/>
-            <result property="categoryId" column="category_id" jdbcType="BIGINT"/>
+            <result property="materialId" column="material_id" jdbcType="BIGINT"/>
+            <result property="bookIndex" column="book_index" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,is_occupied,is_limited,
-        is_reserved,call_number,category_id,
+        is_reserved,material_id,book_index,
         create_time,update_time
     </sql>
 </mapper>

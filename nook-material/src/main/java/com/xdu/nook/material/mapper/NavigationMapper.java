@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
 * @author 21145
 * @description 针对表【navigation】的数据库操作Mapper
-* @createDate 2023-04-09 17:53:02
+* @createDate 2023-04-10 18:42:29
 * @Entity com.xdu.nook.material.entity.NavigationEntity
 */
 @Mapper

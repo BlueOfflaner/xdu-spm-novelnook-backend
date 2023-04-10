@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
 * @author 21145
 * @description 针对表【isbn_info】的数据库操作Mapper
-* @createDate 2023-04-09 18:06:13
+* @createDate 2023-04-10 22:21:27
 * @Entity com.xdu.nook.material.entity.IsbnInfoEntity
 */
 @Mapper

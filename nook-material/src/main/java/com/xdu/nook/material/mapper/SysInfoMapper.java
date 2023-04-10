@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
 * @author 21145
 * @description 针对表【sys_info】的数据库操作Mapper
-* @createDate 2023-04-08 20:57:41
+* @createDate 2023-04-10 22:57:12
 * @Entity com.xdu.nook.material.entity.SysInfoEntity
 */
 @Mapper

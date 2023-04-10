@@ -3,6 +3,8 @@ package com.xdu.nook.material.service;
 import com.xdu.nook.material.entity.CategoryEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
 * @author 21145
 * @description 针对表【category】的数据库操作Service
@@ -10,4 +12,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface CategoryService extends IService<CategoryEntity> {
 
+    List<CategoryEntity> getCategoryTopList();
+
+    List<CategoryEntity> getCategoryMidList();
+
+    List<CategoryEntity> getCategoryLowList();
 }

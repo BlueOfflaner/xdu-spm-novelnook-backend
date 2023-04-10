@@ -16,13 +16,11 @@ import lombok.Data;
 public class BaseInfoEntity implements Serializable {
     private Long id;
 
-    private Long mId;
+    private Long materialId;
 
     private Long isbnInfoId;
 
-    private String storageLocation;
-
-    private Date initTime;
+    private Long localStorage;
 
     private Date createTime;
 

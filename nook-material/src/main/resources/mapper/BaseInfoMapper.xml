@@ -6,17 +6,15 @@
 
     <resultMap id="BaseResultMap" type="com.xdu.nook.material.entity.BaseInfoEntity">
             <id property="id" column="id" jdbcType="BIGINT"/>
-            <result property="mId" column="m_id" jdbcType="BIGINT"/>
+            <result property="materialId" column="material_id" jdbcType="BIGINT"/>
             <result property="isbnInfoId" column="isbn_info_id" jdbcType="BIGINT"/>
-            <result property="storageLocation" column="storage_location" jdbcType="VARCHAR"/>
-            <result property="initTime" column="init_time" jdbcType="TIMESTAMP"/>
+            <result property="localStorage" column="local_storage" jdbcType="BIGINT"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,m_id,isbn_info_id,
-        storage_location,init_time,create_time,
-        update_time
+        id,material_id,isbn_info_id,
+        local_storage,create_time,update_time
     </sql>
 </mapper>

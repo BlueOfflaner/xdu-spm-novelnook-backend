@@ -71,6 +71,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             sysInfo.setPermission(PermissionLevel.PATRON);
             sysInfo.setMaxHoldNum(Constants.MAX_HOLD_NUM);
             sysInfo.setMaxReservationNum(Constants.MAX_RESERVATION_NUMBER);
+            sysInfo.setUsedReservationNum(0);
+            sysInfo.setUsedHoldNum(0);
             sysInfo.setIsAvailable(Constants.DEFAULT_AVAILABLE_STATUS);
             sysInfoService.save(sysInfo);
 

@@ -4,6 +4,7 @@ import com.xdu.nook.api.utils.R;
 import com.xdu.nook.user.service.BaseInfoService;
 import com.xdu.nook.user.service.SysInfoService;
 import com.xdu.nook.user.vo.BaseInfoVo;
+import com.xdu.nook.user.vo.ModifyStatusVo;
 import com.xdu.nook.user.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -30,14 +31,14 @@ public class UpdateController {
     }
 
     @PutMapping("/modify-status")
-    public R modifyStatus(@RequestParam(name = "email") String email,
-                          @RequestParam(name = "permission") Integer permission,
-                          @RequestParam(name = "isAvailable") Integer isAvailable) {
+    public R modifyStatus(@RequestBody ModifyStatusVo modifyStatusVo) {
         //TODO 错误类型
-        if(null == email) {
+        if(null == modifyStatusVo.getEmail()) {
             return R.error();
         }
-        sysInfoService.modifyStatus(email, permission, isAvailable);
+        sysInfoService.modifyStatus(modifyStatusVo.getEmail(),
+                modifyStatusVo.getPermission(),
+                modifyStatusVo.getIsavailable());
         return R.ok();
     }
 

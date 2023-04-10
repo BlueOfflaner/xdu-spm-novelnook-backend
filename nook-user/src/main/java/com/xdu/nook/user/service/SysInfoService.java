@@ -16,7 +16,7 @@ public interface SysInfoService extends IService<SysInfo> {
 
     public SysInfo getSysInfoByEmail(String email);
 
-    void modifyStatus(Long userId, Integer permission, Integer isAvailable);
+    void modifyStatus(String email, Integer permission, Integer isAvailable);
 
     SysInfo getSysInfoByUserId(Long userId);
 

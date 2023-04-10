@@ -1,0 +1,18 @@
+
+spring:
+  application:
+    name: nook-material
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: localhost:8848 #配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEFAULT_GROUP
+        namespace: d74ceae5-9040-46f5-869b-348969ae0551
+      # ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+      # nook-material-dev.yaml
+
+
+

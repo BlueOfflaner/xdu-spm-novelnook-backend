@@ -22,10 +22,10 @@ public class SendCodeServiceImpl implements SendCodeService {
 
         SendInfo sendInfo=new SendInfo();
         sendInfo.setTo(to);
-        code= "您有来自IsabellaViolet的验证码："+
+        String code_msg= "您有来自IsabellaViolet的验证码：\n"+
                 code+
-                "，有效时间60秒，请注意查收";
-        sendInfo.setContext(code);
+                "，\n 有效时间60秒，请注意查收";
+        sendInfo.setContext(code_msg);
         smsClient.send(sendInfo);
         return R.ok("发送成功",code);
     }

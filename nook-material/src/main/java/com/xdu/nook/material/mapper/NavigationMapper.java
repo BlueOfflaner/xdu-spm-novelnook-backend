@@ -2,6 +2,7 @@ package com.xdu.nook.material.mapper;
 
 import com.xdu.nook.material.entity.NavigationEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
 * @author 21145
@@ -9,6 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @createDate 2023-04-09 17:53:02
 * @Entity com.xdu.nook.material.entity.NavigationEntity
 */
+@Mapper
 public interface NavigationMapper extends BaseMapper<NavigationEntity> {
 
 }

@@ -16,8 +16,10 @@ import lombok.Data;
 public class IsbnInfoEntity implements Serializable {
     private Long id;
 
+    @TableField("isbn_10")
     private String isbn10;
 
+    @TableField("isbn_13")
     private String isbn13;
 
     private String title;

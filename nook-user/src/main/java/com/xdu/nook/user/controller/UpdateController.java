@@ -30,13 +30,14 @@ public class UpdateController {
     }
 
     @PutMapping("/modify-status")
-    public R modifyStatus(@RequestParam(name = "id") Long userId,
+    public R modifyStatus(@RequestParam(name = "email") String email,
                           @RequestParam(name = "permission") Integer permission,
                           @RequestParam(name = "isAvailable") Integer isAvailable) {
-        if(null == userId) {
+        //TODO 错误类型
+        if(null == email) {
             return R.error();
         }
-        sysInfoService.modifyStatus(userId, permission, isAvailable);
+        sysInfoService.modifyStatus(email, permission, isAvailable);
         return R.ok();
     }
 

@@ -1,34 +1,7 @@
 server:
   port: 6666
 spring:
-  application:
-    name: nook-material
-  # 数据源配置，默认使用hikari
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.163.130/nook_material?useSSL=false&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.jdbc.Driver
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    db-config:
-      id-type: auto
-
-logging:
-  level:
-    root: info
-
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 60000
-        readTimeout: 60000
-
+  profiles:
+    active: dev
+    #active: test # 表示测试环境
+    #active: product

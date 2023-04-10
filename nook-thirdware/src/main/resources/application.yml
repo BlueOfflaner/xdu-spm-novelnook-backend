@@ -2,23 +2,7 @@ server:
   port: 2333
 
 spring:
-  application:
-    name: nook-third-ware
-  # javaMail配置信息
-  mail:
-    default-encoding: UTF-8
-    host: smtp.qq.com
-    username: 2114568838@qq.com
-    password: ghnojdlitsqaeche
-  # springCloud配置
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-  # 阿里云配置
-    alicloud:
-      access-key: LTAI5tDDzVwswJAmTEiMxQKd
-      secret-key: HSmSocw82cljjSAfebIaT3uIqYZLgs
-      oss:
-        endpoint: oss-cn-huhehaote.aliyuncs.com
-        bucket: gulimall-violet
+  profiles:
+    active: dev
+    #active: test # 表示测试环境
+    #active: product

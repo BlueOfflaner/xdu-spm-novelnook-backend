@@ -41,7 +41,7 @@ public class LoginController {
 
         if (null == res_user_code) {
             String code = (String) sendCodeService.send(to).get("data");
-            redisTemplate.opsForValue().set(s, code, 60, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(s, code, 600, TimeUnit.SECONDS);
         }
         String ret_msg = "成功向" + to + "发送验证码";
         return R.ok(ret_msg);
@@ -58,11 +58,6 @@ public class LoginController {
             return R.error(ERCode.VERTIF_CODE_ERR.getCode(), ERCode.VERTIF_CODE_ERR.getMsg());
         } else {
             if (code.equals(realCode)) {
-                //TODO 此处需要重新设计token生成方案
-//                UserInfoVo userinfo = new UserInfoVo();
-//                userinfo.setToken("612729200104055712");
-//                userinfo.setName("IsabellaViolet");
-//                userinfo.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse("2001-04-05"));
                 UserBaseInfoDto userBaseInfoDto = userClient.welcomeUser(email);
                 UserInfoVo userInfoVo = new UserInfoVo();
                 BeanUtils.copyProperties(userBaseInfoDto,userInfoVo);
@@ -73,4 +68,5 @@ public class LoginController {
             }
         }
     }
+
 }

@@ -6,7 +6,8 @@ import java.util.Date;
 
 @Data
 public class BaseInfoVo {
-    private Long id; //userId?,感觉应该是
+    private Long id;
+    private String email;
     private String nickname;
     private String ukid;
     private Date birthday;

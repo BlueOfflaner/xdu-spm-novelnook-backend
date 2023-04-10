@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: nook-user
+  # 数据源配置，默认使用hikari
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: localhost:8848 #配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEFAULT_GROUP
+        namespace: dbab2ccd-ed52-46b3-9815-82036d1d2930

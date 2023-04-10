@@ -2,23 +2,7 @@ server:
   port: 9527
 
 spring:
-  application:
-    name: nook-auth-server
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-  redis:
-    port: 6379
-    host: 192.168.163.130
-    database: 0
-    password: isabellaviolet
-feign:
-  client:
-    config:
-      default:
-        connectTimeout: 60000
-        readTimeout: 60000
-
-
-
+  profiles:
+    active: dev
+    #active: test # 表示测试环境
+    #active: product

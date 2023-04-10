@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("nook-user")
 public interface UserClient {
-    @GetMapping("welcome/{email}")
-    public UserBaseInfoDto welcomeUser(@PathVariable(value = "email") String email);
+    @GetMapping("/agent/welcome/{email}")
+    public UserBaseInfoDto welcomeUser(@PathVariable("email") String email);
 }

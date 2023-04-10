@@ -19,8 +19,14 @@ import java.util.List;
 @Service
 public class SysInfoServiceImpl extends ServiceImpl<SysInfoMapper, SysInfo> implements SysInfoService {
 
-    public void modifyStatus(Long userId, Integer permission, Integer isAvailable) {
-        SysInfo sysInfo = this.getSysInfoByUserId(userId);
+    //TODO 将
+    public void modifyStatus(String email, Integer permission, Integer isAvailable) {
+
+
+        SysInfo sysInfo = this.getOne(new LambdaQueryWrapper<SysInfo>()
+                .eq(email!=null,
+                        SysInfo::getEmail,
+                        email));
         sysInfo.setPermission(permission);
         sysInfo.setIsAvailable(isAvailable);
         this.updateById(sysInfo);
@@ -28,7 +34,7 @@ public class SysInfoServiceImpl extends ServiceImpl<SysInfoMapper, SysInfo> impl
 
     public void modifyStatusBulk(List<UserInfoVo> userInfoVoList) {
         userInfoVoList.forEach(userInfoVo -> {
-            modifyStatus(userInfoVo.getUserId(), userInfoVo.getPermission(), userInfoVo.getIsAvailable());
+            modifyStatus(userInfoVo.getEmail(), userInfoVo.getPermission(), userInfoVo.getIsAvailable());
         });
     }
 

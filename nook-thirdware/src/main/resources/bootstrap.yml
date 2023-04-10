@@ -1,0 +1,20 @@
+
+
+spring:
+  application:
+    name: nook-third-ware
+  # javaMail配置信息
+  # springCloud配置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        server-addr: localhost:8848 #配置中心地址
+        file-extension: yaml #指定yaml格式的配置
+        group: DEFAULT_GROUP
+        namespace: c2cb0d70-d1f4-42d7-9fa6-ab67c8d68847
+      # ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+      # nook-third-ware-dev.yaml
+  # 阿里云配置
+

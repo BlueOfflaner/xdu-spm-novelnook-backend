@@ -1,41 +1,8 @@
 server:
   port: 88
+
 spring:
-  application:
-    name: nook-gateway
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-    gateway:
-      routes:
-        - id: thirdware
-          uri: lb://nook-thirdware
-          predicates:
-            - Path=/api/thirdware/**
-          filters:
-            - RewritePath=/api/thirdware/(?<segment>.*),/$\{segment}
-
-        - id: auth
-          uri: lb://nook-auth-server
-          predicates:
-            - Path=/api/auth/**
-          filters:
-            - RewritePath=/api/auth/(?<segment>.*),/$\{segment}
-
-        - id: user
-          uri: lb://nook-user
-          predicates:
-            - Path=/api/user/**
-          filters:
-            - RewritePath=/api/user/(?<segment>.*),/$\{segment}
-        - id: material
-          uri: lb://nook-material
-          predicates:
-            - Path=/api/material/**
-          filters:
-            - RewritePath=/api/material/(?<segment>.*),/$\{segment}
-
-logging:
-  level:
-    root: info
+  profiles:
+    active: dev
+    #active: test # 表示测试环境
+    #active: product

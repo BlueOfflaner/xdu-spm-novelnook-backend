@@ -1,26 +1,7 @@
 server:
   port: 10000
 spring:
-  application:
-    name: nook-user
-  # 数据源配置，默认使用hikari
-  datasource:
-    username: root
-    password: 1234
-    url: jdbc:mysql://127.0.0.1/nook_user?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
-    driver-class-name: com.mysql.jdbc.Driver
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
-mybatis-plus:
-  mapper-locations: classpath:/mapper/**/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  global-config:
-    db-config:
-      id-type: auto
-
-logging:
-  level:
-    root: info
+  profiles:
+    active: dev
+    #active: test # 表示测试环境
+    #active: prod

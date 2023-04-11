@@ -7,7 +7,7 @@ import com.xdu.nook.material.feign.MaterialSearchClient;
 import com.xdu.nook.material.service.IsbnInfoService;
 import com.xdu.nook.material.service.IsbnSearchService;
 import com.xdu.nook.material.service.MaterialService;
-import com.xdu.nook.material.vo.MaterialVo;
+import com.xdu.nook.material.vo.MaterialInitialVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -31,11 +31,11 @@ public class UpdateController {
     @PutMapping("/modify-isbn")
     public R modifyIsbn(@RequestBody IsbnInfoEntity isbnInfo) {
         IsbnInfoEntity localSearchedRes = isbnSearchService.ISBNSearch(isbnInfo.getIsbn10());
-        if(null == localSearchedRes) {
+        if (null == localSearchedRes) {
             localSearchedRes = isbnSearchService.ISBNSearch(isbnInfo.getIsbn13());
         }
-        if(null == localSearchedRes) {
-            return R.error(ERCode.SEARCH_ISBN_ERR.getCode(),ERCode.SEARCH_ISBN_ERR.getMsg());
+        if (null == localSearchedRes) {
+            return R.error(ERCode.SEARCH_ISBN_ERR);
         }
         isbnInfoService.updateById(localSearchedRes);
         return R.ok(localSearchedRes);
@@ -43,8 +43,11 @@ public class UpdateController {
 
     //TODO 事务控制
     @PostMapping("/insert-material")
-    public R insertMaterial(@RequestBody String isbnid) {
-        boolean flag = materialService.insertMaterial(isbnid);
-        return flag==true? R.ok():R.error();
+    public R insertMaterial(@RequestBody MaterialInitialVo materialInitialVo) {
+        String isbn = materialInitialVo.getIsbnid();
+        Long navigationId = materialInitialVo.getNavigation();
+        Long selectedMaterialId = materialService.initMaterial(isbn);
+        Boolean flag = materialService.updateMaterial(selectedMaterialId, navigationId);
+        return (selectedMaterialId == null || !flag) ? R.error(ERCode.INSERT_MATERIAL_ERR) : R.ok(selectedMaterialId);
     }
 }

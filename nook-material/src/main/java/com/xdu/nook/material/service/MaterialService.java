@@ -2,6 +2,7 @@ package com.xdu.nook.material.service;
 
 import com.xdu.nook.material.entity.MaterialEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xdu.nook.material.vo.MaterialVo;
 
 /**
 * @author 21145
@@ -9,5 +10,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-04-10 22:54:16
 */
 public interface MaterialService extends IService<MaterialEntity> {
-    public Boolean insertMaterial(String isbn);
+    public Long initMaterial(String isbn);
+
+    public Boolean updateMaterial(Long materialId, Long navigationId);
+
 }

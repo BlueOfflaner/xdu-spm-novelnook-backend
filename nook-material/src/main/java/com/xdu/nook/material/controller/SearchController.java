@@ -7,7 +7,9 @@ import com.xdu.nook.material.entity.IsbnInfoEntity;
 import com.xdu.nook.material.service.IsbnInfoService;
 import com.xdu.nook.material.service.IsbnSearchService;
 import com.xdu.nook.material.service.MaterialService;
+import com.xdu.nook.material.service.NavigationService;
 import com.xdu.nook.material.vo.MaterialVo;
+import com.xdu.nook.material.vo.NavigationListVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,9 @@ public class SearchController {
     @Resource
     MaterialService materialService;
 
+    @Resource
+    NavigationService navigationService;
+
     /**
      * 处理传入的isbn码，若本地已经存在，则返回本地结果，若本地尚未存在则上网搜索，并且持久化到本地，同样返回查找到的结果
      * @param isbn
@@ -37,6 +42,7 @@ public class SearchController {
     //TODO 事务处理
     @GetMapping("/search-isbn")
     public R searchIsbn(String isbn){
+        //TODO 处理初始化isbn的问题
         IsbnInfoEntity localSearchedRes = isbnSearchService.ISBNSearch(isbn);
         if(null == localSearchedRes){
             IsbnInfoEntity onlineSearchedRes = isbnSearchService.ISBNOnlineSearch(isbn);
@@ -60,16 +66,13 @@ public class SearchController {
         return R.ok(pageInfo);
     }
 
-    /*
-    @GetMapping("/get-materials-by-isbn")
-    public R getMaterialsByIsbn(@RequestParam(name = "isbn") String isbn) {
-        IsbnInfoEntity isbnInfo = isbnSearchService.ISBNSearch(isbn);
-        if(null == isbnInfo) {
-            return R.error(ERCode.SEARCH_ISBN_ERR.getCode(),ERCode.SEARCH_ISBN_ERR.getMsg());
-        }
 
-        List<MaterialVo> materialVoList = materialService.getMaterialsByIsbn(isbnInfo);
-        return R.ok(materialVoList);
+    @GetMapping("/get-navigation-list")
+    public R getNavigationList(){
+        List<NavigationListVo> navigationList = navigationService.getNavigationList();
+        if(navigationList==null){
+            return R.error(ERCode.SEARCH_NAVIGATION_ERR);
+        }
+        return R.ok(navigationList);
     }
-    */
 }

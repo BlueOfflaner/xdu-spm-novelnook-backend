@@ -4,16 +4,13 @@ package com.xdu.nook.user.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fasterxml.jackson.databind.ser.Serializers;
-import com.xdu.nook.api.constant.Constants;
+import com.xdu.nook.api.constant.UserConstant;
 import com.xdu.nook.api.constant.PermissionLevel;
 import com.xdu.nook.user.dto.UserBaseInfoDto;
 import com.xdu.nook.user.entity.BaseInfo;
 import com.xdu.nook.user.entity.BorrowInfo;
 import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.entity.User;
-import com.xdu.nook.user.mapper.BaseInfoMapper;
-import com.xdu.nook.user.mapper.SysInfoMapper;
 import com.xdu.nook.user.service.BaseInfoService;
 import com.xdu.nook.user.service.BorrowInfoService;
 import com.xdu.nook.user.service.SysInfoService;
@@ -26,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -69,11 +65,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             sysInfo = new SysInfo();
             sysInfo.setEmail(email);
             sysInfo.setPermission(PermissionLevel.PATRON);
-            sysInfo.setMaxHoldNum(Constants.MAX_HOLD_NUM);
-            sysInfo.setMaxReservationNum(Constants.MAX_RESERVATION_NUMBER);
+            sysInfo.setMaxHoldNum(UserConstant.MAX_HOLD_NUM);
+            sysInfo.setMaxReservationNum(UserConstant.MAX_RESERVATION_NUMBER);
             sysInfo.setUsedReservationNum(0);
             sysInfo.setUsedHoldNum(0);
-            sysInfo.setIsAvailable(Constants.DEFAULT_AVAILABLE_STATUS);
+            sysInfo.setIsAvailable(UserConstant.DEFAULT_AVAILABLE_STATUS);
             sysInfoService.save(sysInfo);
 
             //新建user对象，为user绑定sysinfo对象

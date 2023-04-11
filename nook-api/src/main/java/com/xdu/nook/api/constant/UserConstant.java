@@ -1,6 +1,6 @@
 package com.xdu.nook.api.constant;
 
-public class Constants {
+public class UserConstant {
     /**
      * 最大预约图书数量限制
      */

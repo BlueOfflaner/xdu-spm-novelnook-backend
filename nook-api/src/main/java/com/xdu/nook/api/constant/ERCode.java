@@ -18,7 +18,15 @@ public enum ERCode {
     /**
      * isbn查询失败
      */
-    SEARCH_ISBN_ERR("SEARCH_ISBN_ERR","C1001");
+    SEARCH_ISBN_ERR("SEARCH_ISBN_ERR","C1001"),
+    /**
+     * 插入material异常
+     */
+    INSERT_MATERIAL_ERR("INSERT_MATERIAL_ERR","B1002"),
+    /**
+     * 查询navigation异常
+     */
+    SEARCH_NAVIGATION_ERR("SEARCH_NAVIGATION_ERR","A1001");
     public String msg;
     public String code;
 

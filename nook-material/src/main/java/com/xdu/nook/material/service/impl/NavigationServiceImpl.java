@@ -55,6 +55,7 @@ public class NavigationServiceImpl extends ServiceImpl<NavigationMapper, Navigat
     private List<NavigationListVo> bfs(List<NavigationEntity> allList) {
         //TODO 要点1
         int maxLevel = allList.stream()
+                //C++：空参函数指针
                 .map(NavigationEntity::getLevel)
                 .reduce(0, (max, level) -> {
                     return level > max ? level : max;
@@ -90,7 +91,6 @@ public class NavigationServiceImpl extends ServiceImpl<NavigationMapper, Navigat
                 }
             }
         }
-
         return buckets.get(0);
     }
 }

@@ -48,7 +48,7 @@ public class SearchController {
      * @param isbn
      * @return
      */
-    //TODO 事务处理
+
     @GetMapping("/search-isbn")
     public R searchIsbn(String isbn) {
         //TODO 处理初始化isbn的问题
@@ -94,8 +94,9 @@ public class SearchController {
         List<SearchMaterialVo> searchMaterialVoL = new ArrayList<>();
         SearchMaterialVo searchMaterialVo = new SearchMaterialVo();
 
-        List<BaseInfoEntity> baseInfoList = baseInfoService.list(new LambdaQueryWrapper<BaseInfoEntity>().eq(BaseInfoEntity::getIsbnInfoId,
-                isbnId));
+        List<BaseInfoEntity> baseInfoList = baseInfoService.list(new LambdaQueryWrapper<BaseInfoEntity>()
+                .eq(BaseInfoEntity::getIsbnInfoId,
+                        isbnId));
         baseInfoList.stream().forEach(item -> {
             SysInfoEntity sysInfo = sysInfoService.getSysInfoWithBaseInfo(item);
             searchMaterialVo.setSysInfo(sysInfo);

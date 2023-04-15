@@ -3,12 +3,16 @@ package com.xdu.nook.user.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xdu.nook.api.utils.R;
+import com.xdu.nook.user.dto.RegistDto;
 import com.xdu.nook.user.dto.UserBaseInfoDto;
+import com.xdu.nook.user.entity.BaseInfo;
 import com.xdu.nook.user.entity.SysInfo;
 import com.xdu.nook.user.entity.User;
+import com.xdu.nook.user.service.BaseInfoService;
 import com.xdu.nook.user.service.SysInfoService;
 import com.xdu.nook.user.service.UserService;
 import com.xdu.nook.user.vo.UserInfoVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -24,10 +28,13 @@ public class AgentController {
     @Resource
     SysInfoService sysInfoService;
 
+    @Resource
+    BaseInfoService baseInfoService;
+
     @ResponseBody
-    @PostMapping("/welcome/")
-    public UserBaseInfoDto welcomeUser(@RequestParam String email,@RequestParam String password){
-        UserBaseInfoDto userBaseInfoDto = userService.welcomeUser(email,password);
+    @PostMapping("/welcome")
+    public UserBaseInfoDto welcomeUser(@RequestBody RegistDto registDto){
+        UserBaseInfoDto userBaseInfoDto = userService.welcomeUser(registDto.getEmail(), registDto.getPassword());
         return userBaseInfoDto;
     }
 
@@ -65,7 +72,9 @@ public class AgentController {
 
         Long userId = selectedSys.getUserId();
         UserBaseInfoDto userBaseInfoDto = new UserBaseInfoDto();
-        userBaseInfoDto.setId(userId);
+        BaseInfo baseInfoByUserId = baseInfoService.getBaseInfoByUserId(userId);
+        BeanUtils.copyProperties(baseInfoByUserId,userBaseInfoDto);
+        userBaseInfoDto.setUKIDCode(baseInfoByUserId.getUkIdCode());
         return  userBaseInfoDto;
     }
 }

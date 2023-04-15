@@ -1,7 +1,6 @@
 package com.xdu.nook.user.config;
 
-import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,9 +8,12 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusConfig {
 
     @Bean
-    public MybatisPlusInterceptor mybatisPlusInterceptor() {
-        MybatisPlusInterceptor mybatisPlusInterceptor = new MybatisPlusInterceptor();
-        mybatisPlusInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
-        return mybatisPlusInterceptor;
+    PaginationInterceptor paginationInterceptor(){
+        PaginationInterceptor paginationInterceptor=new PaginationInterceptor();
+        //请求页面大于最大页时，返回首页而非空
+        paginationInterceptor.setOverflow(true);
+        //设置最大单页数量，-1表示不受限
+        paginationInterceptor.setLimit(1000);
+        return paginationInterceptor;
     }
 }

@@ -19,7 +19,6 @@ import com.xdu.nook.user.mapper.UserMapper;
 import com.xdu.nook.user.vo.UserInfoVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -55,6 +54,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     public UserBaseInfoDto welcomeUser(String email, String password) {
         //预声明三个对象，因为这个业务中明确地只有三个对象
+
         SysInfo sysInfo = sysInfoService.getSysInfoByEmail(email);
 
         BaseInfo baseInfo;

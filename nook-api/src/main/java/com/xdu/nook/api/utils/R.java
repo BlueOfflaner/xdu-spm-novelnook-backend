@@ -30,14 +30,15 @@ public class R extends HashMap<String, Object> {
 
 
     public static R error() {
-        return error(new Integer(HttpStatus.SC_INTERNAL_SERVER_ERROR).toString(), "未知异常，请联系管理员");
+        return error(ERCode.SYSTEM_ERR.getCode(), "未知异常，请联系管理员");
     }
 
-    public static R error(ERCode er){
-        return error(er.getCode(),er.getMsg());
+    public static R error(ERCode er) {
+        return error(er.getCode(), er.getMsg());
     }
+
     public static R error(String msg) {
-        return error(new Integer(HttpStatus.SC_INTERNAL_SERVER_ERROR).toString(), msg);
+        return error(ERCode.SYSTEM_ERR.getCode(), msg);
     }
 
     public static R error(String code, String msg) {

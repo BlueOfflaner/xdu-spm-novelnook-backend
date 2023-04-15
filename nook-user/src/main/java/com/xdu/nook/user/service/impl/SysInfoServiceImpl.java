@@ -46,8 +46,12 @@ public class SysInfoServiceImpl extends ServiceImpl<SysInfoMapper, SysInfo> impl
     }
 
     public SysInfo getSysInfoByEmail(String email) {
+        //TODO 待处理疑点
         LambdaQueryWrapper<SysInfo> queryWrapper = new LambdaQueryWrapper<>();
+
         queryWrapper.eq(email != null, SysInfo::getEmail, email);
+        List<SysInfo> list = this.list(queryWrapper);
+
         SysInfo sysInfo = this.getOne(queryWrapper);
         return sysInfo;
     }

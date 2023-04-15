@@ -4,6 +4,7 @@ import com.xdu.nook.api.constant.ERCode;
 import com.xdu.nook.api.constant.RedisIndex;
 import com.xdu.nook.api.utils.R;
 
+import com.xdu.nook.authserver.dto.RegistDto;
 import com.xdu.nook.authserver.dto.UserBaseInfoDto;
 import com.xdu.nook.authserver.feign.UserClient;
 import com.xdu.nook.authserver.service.CheckVerificationCode;
@@ -31,6 +32,7 @@ public class LoginController {
     StringRedisTemplate redisTemplate;
     @Resource
     UserClient userClient;
+
     @Resource
     CheckVerificationCode checkVerificationCode;
 
@@ -40,8 +42,6 @@ public class LoginController {
         String s = RedisIndex.LOGIN_CODE + to;
 
         String res_user_code = redisTemplate.opsForValue().get(s);
-
-
         if (null == res_user_code) {
             String code = (String) sendCodeService.send(to).get("data");
             redisTemplate.opsForValue().set(s, code, 600, TimeUnit.SECONDS);
@@ -50,7 +50,7 @@ public class LoginController {
         return R.ok(ret_msg);
     }
 
-    //TODO 有待处理异常
+
     @PostMapping("/regist")
     public R testRegist(@RequestBody HashMap<String, String> request) throws ParseException {
         String email = request.get("email");
@@ -64,19 +64,26 @@ public class LoginController {
                     return R.error(ERCode.PARAM_ERR);
                 }else{
                     //ep
+
+
                     UserBaseInfoDto userBaseInfoDto = userClient.loginWithPassword(email, password);
                     if(userBaseInfoDto.getId()==null){
                         return R.error(ERCode.LOGIN_INFO_ERR);
                     }else {
                         UserInfoVo userInfoVo = new UserInfoVo();
-                        userInfoVo.setId(userBaseInfoDto.getId());
+                        BeanUtils.copyProperties(userBaseInfoDto,userInfoVo);
                         return R.ok(userInfoVo);
                     }
                 }
             }else{
                 Boolean flag = checkVerificationCode.test(email, code);
+                //ec
                 if (flag) {
-                    UserBaseInfoDto userBaseInfoDto = userClient.welcomeUser(email, password);
+
+                    System.out.println("email:"+email+" | password："+password+" | flag："+flag);
+
+                    RegistDto registDto = new RegistDto(email, password);
+                    UserBaseInfoDto userBaseInfoDto = userClient.welcomeUser(registDto);
                     UserInfoVo userInfoVo = new UserInfoVo();
                     BeanUtils.copyProperties(userBaseInfoDto, userInfoVo);
                     userInfoVo.setToken("612729200104055712");

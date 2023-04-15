@@ -1,6 +1,7 @@
 package com.xdu.nook.material.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xdu.nook.material.entity.BaseInfoEntity;
 import com.xdu.nook.material.entity.IsbnInfoEntity;
 
 /**
@@ -9,5 +10,5 @@ import com.xdu.nook.material.entity.IsbnInfoEntity;
 * @createDate 2023-04-10 18:42:29
 */
 public interface IsbnInfoService extends IService<IsbnInfoEntity> {
-
+    public IsbnInfoEntity getIsbnWithBaseInfoService(BaseInfoEntity baseInfoEntity);
 }

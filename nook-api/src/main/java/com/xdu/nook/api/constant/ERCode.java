@@ -26,7 +26,9 @@ public enum ERCode {
     /**
      * 查询navigation异常
      */
-    SEARCH_NAVIGATION_ERR("SEARCH_NAVIGATION_ERR","A1001");
+    SEARCH_NAVIGATION_ERR("SEARCH_NAVIGATION_ERR","A1001"),
+
+    LOGIN_INFO_ERR("LOGIN_INFO_ERR","B1003");
     public String msg;
     public String code;
 

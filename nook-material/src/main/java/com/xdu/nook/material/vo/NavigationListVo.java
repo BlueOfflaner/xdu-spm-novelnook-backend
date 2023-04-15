@@ -1,17 +1,33 @@
 package com.xdu.nook.material.vo;
 
 import com.xdu.nook.material.entity.NavigationEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class NavigationListVo extends NavigationEntity {
-    List<NavigationListVo> children =new ArrayList<>();
 
+
+public class NavigationListVo extends NavigationEntity {
+    List<NavigationListVo> children ;
+
+    public NavigationListVo() {
+        this.children=new ArrayList<>();
+    }
+
+    public NavigationListVo(List<NavigationListVo> children) {
+        this.children = children;
+    }
+
+
+    public List<NavigationListVo> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<NavigationListVo> children) {
+        this.children = children;
+    }
+
+    public List<NavigationListVo> bfs() {
+        return null;
+    }
 }

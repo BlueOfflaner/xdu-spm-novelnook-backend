@@ -12,6 +12,7 @@ spring:
         namespace: 34ec104d-39ca-4670-96f5-845fb6c31a38
     gateway:
       routes:
+
         - id: thirdware
           uri: lb://nook-thirdware
           predicates:
@@ -32,12 +33,21 @@ spring:
             - Path=/api/user/**
           filters:
             - RewritePath=/api/user/(?<segment>.*),/$\{segment}
+
         - id: material
           uri: lb://nook-material
           predicates:
             - Path=/api/material/**
           filters:
             - RewritePath=/api/material/(?<segment>.*),/$\{segment}
+
+        - id: message
+          uri: lb://nook-message
+          predicates:
+            - Path=/api/message/**
+          filters:
+            - RewritePath=/api/message/(?<segment>.*),/$\{segment}
+
 
 logging:
   level:

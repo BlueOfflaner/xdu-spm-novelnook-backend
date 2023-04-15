@@ -18,7 +18,7 @@ import java.util.List;
 */
 public interface UserService extends IService<User> {
 
-    public UserBaseInfoDto welcomeUser(String email);
+    public UserBaseInfoDto welcomeUser(String email,String password);
 
     public User getUserBySysInfo(SysInfo sysInfo);
 

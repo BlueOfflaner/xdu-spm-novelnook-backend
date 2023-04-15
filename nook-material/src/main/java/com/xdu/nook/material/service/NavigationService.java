@@ -1,5 +1,6 @@
 package com.xdu.nook.material.service;
 
+import com.xdu.nook.material.entity.BaseInfoEntity;
 import com.xdu.nook.material.entity.NavigationEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xdu.nook.material.vo.NavigationListVo;
@@ -13,4 +14,6 @@ import java.util.List;
 */
 public interface NavigationService extends IService<NavigationEntity> {
     public List<NavigationListVo> getNavigationList();
+
+    public List<NavigationEntity> getNavigationListWithBaseInfo(BaseInfoEntity baseInfoEntity);
 }

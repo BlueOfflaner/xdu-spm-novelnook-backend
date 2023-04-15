@@ -1,7 +1,11 @@
 package com.xdu.nook.material.service;
 
+import com.xdu.nook.material.entity.BaseInfoEntity;
 import com.xdu.nook.material.entity.CategoryEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xdu.nook.material.entity.NavigationEntity;
+import com.xdu.nook.material.vo.CategoryListVo;
+import com.xdu.nook.material.vo.NavigationListVo;
 
 import java.util.List;
 
@@ -12,9 +16,7 @@ import java.util.List;
 */
 public interface CategoryService extends IService<CategoryEntity> {
 
-    List<CategoryEntity> getCategoryTopList();
+    public List<CategoryListVo> getCategoryList();
 
-    List<CategoryEntity> getCategoryMidList();
-
-    List<CategoryEntity> getCategoryLowList();
+    public List<CategoryEntity> getCategoryListWithBaseInfo(BaseInfoEntity baseInfoEntity);
 }

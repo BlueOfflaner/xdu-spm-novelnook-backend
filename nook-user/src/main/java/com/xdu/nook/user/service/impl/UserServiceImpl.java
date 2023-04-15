@@ -52,8 +52,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
      *
      * @param email 这表明，需要判断的对象是一个邮箱
      */
-    @Transactional
-    public UserBaseInfoDto welcomeUser(String email) {
+
+    public UserBaseInfoDto welcomeUser(String email, String password) {
         //预声明三个对象，因为这个业务中明确地只有三个对象
         SysInfo sysInfo = sysInfoService.getSysInfoByEmail(email);
 
@@ -69,6 +69,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             sysInfo.setMaxReservationNum(UserConstant.MAX_RESERVATION_NUMBER);
             sysInfo.setUsedReservationNum(0);
             sysInfo.setUsedHoldNum(0);
+            if (password != null) {
+                sysInfo.setPassword(password);
+            }
             sysInfo.setIsAvailable(UserConstant.DEFAULT_AVAILABLE_STATUS);
             sysInfoService.save(sysInfo);
 

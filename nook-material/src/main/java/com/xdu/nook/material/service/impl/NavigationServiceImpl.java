@@ -1,6 +1,7 @@
 package com.xdu.nook.material.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xdu.nook.material.entity.BaseInfoEntity;
 import com.xdu.nook.material.entity.NavigationEntity;
 import com.xdu.nook.material.service.NavigationService;
 import com.xdu.nook.material.mapper.NavigationMapper;
@@ -26,16 +27,32 @@ public class NavigationServiceImpl extends ServiceImpl<NavigationMapper, Navigat
     @Resource
     NavigationService navigationService;
 
+
+
     @Override
     public List<NavigationListVo> getNavigationList() {
-
-        return bfs();
+        List<NavigationEntity> allList = navigationService.list();
+        return bfs(allList);
     }
 
-    private List<NavigationListVo> bfs() {
+    @Override
+    public List<NavigationEntity> getNavigationListWithBaseInfo(BaseInfoEntity baseInfoEntity) {
+        List<NavigationEntity> nList= new ArrayList<>();
+        Long localStorageId = baseInfoEntity.getLocalStorage();
+        NavigationEntity last = navigationService.getById(localStorageId);
+        nList.add(last);
+        Integer level = last.getLevel();
+        Long selectedId =last.getPId();
+        for(int i=0;i<level;i++){
+            NavigationEntity byId = navigationService.getById(selectedId);
+            nList.add(byId);
+            selectedId=byId.getPId();
+        }
+        return nList;
+    }
 
-        List<NavigationEntity> allList = navigationService.list();
 
+    private List<NavigationListVo> bfs(List<NavigationEntity> allList) {
         //TODO 要点1
         int maxLevel = allList.stream()
                 .map(NavigationEntity::getLevel)

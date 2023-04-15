@@ -1,5 +1,6 @@
 package com.xdu.nook.material.service;
 
+import com.xdu.nook.material.entity.BaseInfoEntity;
 import com.xdu.nook.material.entity.SysInfoEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -9,5 +10,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-04-10 18:42:29
 */
 public interface SysInfoService extends IService<SysInfoEntity> {
-
+    public SysInfoEntity getSysInfoWithBaseInfo(BaseInfoEntity baseInfoEntity);
 }

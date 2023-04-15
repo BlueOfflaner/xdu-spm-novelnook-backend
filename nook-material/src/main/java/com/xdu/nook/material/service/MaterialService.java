@@ -2,7 +2,6 @@ package com.xdu.nook.material.service;
 
 import com.xdu.nook.material.entity.MaterialEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.xdu.nook.material.vo.MaterialVo;
 
 /**
 * @author 21145

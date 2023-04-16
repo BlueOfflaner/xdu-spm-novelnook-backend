@@ -93,4 +93,10 @@ public class UpdateController {
         navigationService.removeById(navigationEntity);
         return R.ok();
     }
+
+    @PutMapping("/update-isbn")
+    public R updateIsbn(IsbnInfoEntity isbnInfo){
+        isbnInfoService.updateById(isbnInfo);
+        return R.ok();
+    }
 }

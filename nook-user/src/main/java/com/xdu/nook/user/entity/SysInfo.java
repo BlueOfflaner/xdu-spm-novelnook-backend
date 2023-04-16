@@ -1,5 +1,6 @@
 package com.xdu.nook.user.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
@@ -13,8 +14,12 @@ import lombok.Data;
 @TableName(value ="sys_info")
 @Data
 public class SysInfo implements Serializable {
+
+    @JSONField(serializeUsing = Long.class)
+    @TableId(type = IdType.AUTO)
     private Long id;
 
+    @JSONField(serializeUsing = Long.class)
     private Long userId;
 
     private Integer permission;

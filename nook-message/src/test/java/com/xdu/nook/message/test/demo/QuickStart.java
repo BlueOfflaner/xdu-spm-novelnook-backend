@@ -1,10 +1,9 @@
-package com.xdu.nook.message.test.Test;
+package com.xdu.nook.message.test.demo;
 
 import lombok.extern.log4j.Log4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -24,7 +23,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@Log4j
 @SpringBootTest
 public class QuickStart {
     @Test

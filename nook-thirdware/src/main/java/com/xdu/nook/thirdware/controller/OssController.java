@@ -72,7 +72,7 @@ public class OssController {
 
         } catch (Exception e) {
             // Assert.fail(e.getMessage());
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return new R().put("data", respMap);

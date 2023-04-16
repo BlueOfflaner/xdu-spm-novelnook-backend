@@ -121,7 +121,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     public List<UserInfoVo> getUserInfoAll() {
         List<UserInfoVo> userInfoVoList = userMapper.getUserInfoAll();
-
         return userInfoVoList;
     }
 
@@ -155,7 +154,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
 
     private void packUserBaseInfoDto(UserBaseInfoDto userBaseInfoDto, BaseInfo baseInfo, SysInfo sysInfo) {
         userBaseInfoDto.setId(sysInfo.getUserId());
-        userBaseInfoDto.setUKIDCode(baseInfo.getUkIdCode());
+        userBaseInfoDto.setUKIDCode(baseInfo.getUKIDCode());
         userBaseInfoDto.setName(baseInfo.getName());
         userBaseInfoDto.setBirthday(baseInfo.getBirthday());
         userBaseInfoDto.setEmail(sysInfo.getEmail());

@@ -9,11 +9,6 @@ import com.xdu.nook.user.mapper.BaseInfoMapper;
 import com.xdu.nook.user.vo.BaseInfoVo;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
 * @author violet
 * @description 针对表【base_info】的数据库操作Service实现
@@ -32,7 +27,7 @@ implements BaseInfoService{
 
     public void initBaseInfo(BaseInfoVo baseInfoVo) {
         BaseInfo baseInfo = this.getBaseInfoByUserId(baseInfoVo.getId());
-        baseInfo.setUkIdCode(baseInfoVo.getUkid());
+        baseInfo.setUKIDCode(baseInfoVo.getUkid());
         baseInfo.setName(baseInfoVo.getNickname());
         baseInfo.setBirthday(baseInfoVo.getBirthday());
 

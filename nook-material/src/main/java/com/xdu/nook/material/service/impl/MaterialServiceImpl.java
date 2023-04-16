@@ -63,6 +63,7 @@ public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, MaterialEnt
             return null;
         }
 
+
         Long isbn_info_id = isbnInfoEntity.getId();
         BaseInfoEntity baseInfoEntity = new BaseInfoEntity();
         baseInfoEntity.setIsbnInfoId(isbn_info_id);
@@ -105,6 +106,10 @@ public class MaterialServiceImpl extends ServiceImpl<MaterialMapper, MaterialEnt
         if(baseInfo ==null)return false;
         baseInfo.setLocalStorage(navigationId);
         baseInfoService.updateById(baseInfo);
+
+        IsbnInfoEntity isbnWithBaseInfoService = isbnInfoService.getIsbnWithBaseInfoService(baseInfo);
+        isbnWithBaseInfoService.setCapacity(isbnWithBaseInfoService.getCapacity()+1);
+        isbnInfoService.updateById(isbnWithBaseInfoService);
         return true;
     }
 

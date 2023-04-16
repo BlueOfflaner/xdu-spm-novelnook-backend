@@ -22,6 +22,7 @@ public class ISBNController {
 
     @GetMapping(value = "/search-isbn")
     public IsbnInfoEntity searchIsbn(@RequestParam("isbn") String isbn) {
+        System.out.println("searching...");
         try {
             String url = base_url + isbn;
 
@@ -29,6 +30,7 @@ public class ISBNController {
             String selfLink = ISBNUtils.parseSelfLink(forObject);
             String self_json = restTemplate.getForObject(selfLink, String.class);
             IsbnInfoEntity isbnInfoEntity = ISBNUtils.parseEntity(self_json);
+            if(isbnInfoEntity.getCapacity()==null)isbnInfoEntity.setCapacity(0);
             System.out.println(isbnInfoEntity);
             return isbnInfoEntity;
         } catch (Exception e) {

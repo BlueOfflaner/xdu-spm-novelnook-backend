@@ -23,6 +23,7 @@ public class JobTest {
 
     @Resource
     Reminder reminder;
+
     @Test
     public void run() {
         test();
@@ -34,21 +35,24 @@ public class JobTest {
         int size = userDetailedInfo.size();
         if (size >= 0) {
             for (Object o : userDetailedInfo) {
-                JSONObject json_item = (JSONObject) o;
-                Integer usedHoldNum = (Integer) json_item.get("usedHoldNum");
+                if (o instanceof JSONObject) {
+                    JSONObject json_item = (JSONObject) o;
 
-                Object userId_obj = json_item.get("userId");
-                Long userId;
-                if(userId_obj instanceof Integer){
-                    userId=((Integer) userId_obj).longValue();
-                }else if(userId_obj instanceof Long){
-                    userId = ((Long) userId_obj);
-                }else {
-                    throw new RuntimeException("寄");
-                }
+                    Integer usedHoldNum = (Integer) json_item.get("usedHoldNum");
 
-                if (usedHoldNum > 0) {
-                    check(userId, usedHoldNum);
+                    Object userId_obj = json_item.get("userId");
+                    Long userId;
+                    if (userId_obj instanceof Integer) {
+                        userId = ((Integer) userId_obj).longValue();
+                    } else if (userId_obj instanceof Long) {
+                        userId = ((Long) userId_obj);
+                    } else {
+                        throw new RuntimeException("寄");
+                    }
+
+                    if (usedHoldNum > 0) {
+                        check(userId, usedHoldNum);
+                    }
                 }
             }
         }

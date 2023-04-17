@@ -92,12 +92,11 @@ public class SearchController {
             return R.error(ERCode.SEARCH_ISBN_ERR);
         }
         List<SearchMaterialVo> searchMaterialVoL = new ArrayList<>();
-        SearchMaterialVo searchMaterialVo = new SearchMaterialVo();
-
         List<BaseInfoEntity> baseInfoList = baseInfoService.list(new LambdaQueryWrapper<BaseInfoEntity>()
                 .eq(BaseInfoEntity::getIsbnInfoId,
                         isbnId));
         baseInfoList.stream().forEach(item -> {
+            SearchMaterialVo searchMaterialVo = new SearchMaterialVo();
             SysInfoEntity sysInfo = sysInfoService.getSysInfoWithBaseInfo(item);
             searchMaterialVo.setSysInfo(sysInfo);
             IsbnInfoEntity isbnInfo = isbnInfoService.getIsbnWithBaseInfoService(item);

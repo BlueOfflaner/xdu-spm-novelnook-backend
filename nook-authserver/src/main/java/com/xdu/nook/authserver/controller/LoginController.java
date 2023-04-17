@@ -60,14 +60,14 @@ public class LoginController {
             return R.error(ERCode.PARAM_ERR);
         }else{
             if(code ==null){
-                if(password ==null){
+                if(password==null){
                     return R.error(ERCode.PARAM_ERR);
                 }else{
                     //ep
 
 
                     UserBaseInfoDto userBaseInfoDto = userClient.loginWithPassword(email, password);
-                    if(userBaseInfoDto.getId()==null){
+                    if( userBaseInfoDto==null ||userBaseInfoDto.getId()==null){
                         return R.error(ERCode.LOGIN_INFO_ERR);
                     }else {
                         UserInfoVo userInfoVo = new UserInfoVo();

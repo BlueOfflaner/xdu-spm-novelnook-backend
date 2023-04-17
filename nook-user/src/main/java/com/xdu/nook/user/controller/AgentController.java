@@ -34,7 +34,7 @@ public class AgentController {
 
     @ResponseBody
     @PostMapping("/welcome")
-    public UserBaseInfoDto welcomeUser(@RequestBody RegistDto registDto){
+    public UserBaseInfoDto welcomeUser(@RequestBody RegistDto registDto) {
         UserBaseInfoDto userBaseInfoDto = userService.welcomeUser(registDto.getEmail(), registDto.getPassword());
         return userBaseInfoDto;
     }
@@ -43,7 +43,7 @@ public class AgentController {
     @GetMapping("/get-user-info")
     public R getOneUser(@RequestParam String id) {
         UserInfoVo userInfoVo = userService.getOneUser(Long.valueOf(id));
-        if(null == userInfoVo) {
+        if (null == userInfoVo) {
             return R.error();
         }
         return R.ok(userInfoVo);
@@ -63,24 +63,17 @@ public class AgentController {
     }
 
     @GetMapping("/get-user-detailed-info-all")
-    public String getUserDetailedInfo(){
+    public String getUserDetailedInfo() {
 
         List<UserInfoVo> userInfoAll = userService.getUserInfoAll();
-        System.out.println("-------------------");
-        System.out.println(userInfoAll);
-        System.out.println(userInfoAll.size());
-        System.out.println("-------------------");
         JSONArray jsonArray = new JSONArray();
-        userInfoAll.stream().forEach(item->{
+        userInfoAll.stream().forEach(item -> {
             JSONObject jsonObject_item = new JSONObject();
-
-            jsonObject_item.put("name",item.getName());
-            jsonObject_item.put("userId",item.getUserId());
-            jsonObject_item.put("usedHoldNum",item.getUsedHoldNum());
+            jsonObject_item.put("name", item.getName());
+            jsonObject_item.put("userId", item.getUserId());
+            jsonObject_item.put("usedHoldNum", item.getUsedHoldNum());
             jsonArray.add(jsonObject_item);
         });
-        System.out.println(jsonArray);
-        System.out.println("-------------------");
         return jsonArray.toJSONString();
     }
 
@@ -88,16 +81,18 @@ public class AgentController {
     @ResponseBody
     @PostMapping("/password/login")
     public UserBaseInfoDto loginWithPassword(@RequestParam String email
-            ,@RequestParam String password){
+            , @RequestParam String password) {
         SysInfo selectedSys = sysInfoService.getOne(new LambdaQueryWrapper<SysInfo>()
                 .eq(SysInfo::getEmail, email)
                 .eq(SysInfo::getPassword, password));
 
+        if (selectedSys == null)
+            return null;
         Long userId = selectedSys.getUserId();
         UserBaseInfoDto userBaseInfoDto = new UserBaseInfoDto();
         BaseInfo baseInfoByUserId = baseInfoService.getBaseInfoByUserId(userId);
-        BeanUtils.copyProperties(baseInfoByUserId,userBaseInfoDto);
+        BeanUtils.copyProperties(baseInfoByUserId, userBaseInfoDto);
         userBaseInfoDto.setUKIDCode(baseInfoByUserId.getUKIDCode());
-        return  userBaseInfoDto;
+        return userBaseInfoDto;
     }
 }

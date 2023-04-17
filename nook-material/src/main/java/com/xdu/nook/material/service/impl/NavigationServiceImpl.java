@@ -40,6 +40,9 @@ public class NavigationServiceImpl extends ServiceImpl<NavigationMapper, Navigat
         List<NavigationEntity> nList= new ArrayList<>();
         Long localStorageId = baseInfoEntity.getLocalStorage();
         NavigationEntity last = navigationService.getById(localStorageId);
+        if(last==null){
+            return null;
+        }
         nList.add(last);
         Integer level = last.getLevel();
         Long selectedId =last.getPId();

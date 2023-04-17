@@ -37,11 +37,24 @@ public class JobDemo extends QuartzJobBean {
         int size = userDetailedInfo.size();
         if (size >= 0) {
             for (Object o : userDetailedInfo) {
-                HashMap<String, Object> json_item = (HashMap<String, Object>) o;
-                Integer usedHoldNum = (Integer) json_item.get("usedHoldNum");
-                Long userId = (Long) json_item.get("userId");
-                if (usedHoldNum > 0) {
-                    check(userId, usedHoldNum);
+                if (o instanceof JSONObject) {
+                    JSONObject json_item = (JSONObject) o;
+
+                    Integer usedHoldNum = (Integer) json_item.get("usedHoldNum");
+
+                    Object userId_obj = json_item.get("userId");
+                    Long userId;
+                    if (userId_obj instanceof Integer) {
+                        userId = ((Integer) userId_obj).longValue();
+                    } else if (userId_obj instanceof Long) {
+                        userId = ((Long) userId_obj);
+                    } else {
+                        throw new RuntimeException("寄");
+                    }
+
+                    if (usedHoldNum > 0) {
+                        check(userId, usedHoldNum);
+                    }
                 }
             }
         }

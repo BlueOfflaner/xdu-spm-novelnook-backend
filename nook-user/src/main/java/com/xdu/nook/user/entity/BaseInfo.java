@@ -23,6 +23,7 @@ public class BaseInfo implements Serializable {
     @JSONField(serializeUsing = Long.class)
     private Long userId;
 
+    @TableField("uk_id_code")
     private String UKIDCode;
 
     private String name;

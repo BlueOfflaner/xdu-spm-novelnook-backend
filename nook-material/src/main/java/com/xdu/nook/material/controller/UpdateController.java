@@ -41,15 +41,8 @@ public class UpdateController {
 
     @PutMapping("/modify-isbn")
     public R modifyIsbn(@RequestBody IsbnInfoEntity isbnInfo) {
-        IsbnInfoEntity localSearchedRes = isbnSearchService.ISBNSearch(isbnInfo.getIsbn10());
-        if (null == localSearchedRes) {
-            localSearchedRes = isbnSearchService.ISBNSearch(isbnInfo.getIsbn13());
-        }
-        if (null == localSearchedRes) {
-            return R.error(ERCode.SEARCH_ISBN_ERR);
-        }
-        isbnInfoService.updateById(localSearchedRes);
-        return R.ok(localSearchedRes);
+        isbnInfoService.updateById(isbnInfo);
+        return R.ok(isbnInfo);
     }
 
     //TODO 事务控制

@@ -77,11 +77,14 @@ public class ISBNUtils {
     }
 
     public static String parseSelfLink(String json_str) throws NullPointerException{
-        JSONObject jsonObject = (JSONObject) JSONObject.parse(json_str);
-        JSONArray items = (JSONArray) jsonObject.get("items");
-        JSONObject o = (JSONObject) items.get(0);
-        String selfLink = (String) o.get("selfLink");
-
-        return selfLink;
+        try {
+            JSONObject jsonObject = (JSONObject) JSONObject.parse(json_str);
+            JSONArray items = (JSONArray) jsonObject.get("items");
+            JSONObject o = (JSONObject) items.get(0);
+            String selfLink = (String) o.get("selfLink");
+            return selfLink;
+        }catch (Exception e){
+            throw new NullPointerException("未查询到任何书籍");
+        }
     }
 }

@@ -11,7 +11,7 @@ public class Reminder {
     RocketMQTemplate rocketMQTemplate;
 
     public void arrearsRemind(String msg){
-        rocketMQTemplate.convertAndSend(msg,"Reminder");
+        rocketMQTemplate.convertAndSend("Reminder",msg);
     }
 
 }

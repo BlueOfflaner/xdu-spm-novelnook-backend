@@ -5,3 +5,9 @@ spring:
     active: dev
     #active: test # 表示测试环境
     #active: prod
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl

@@ -20,26 +20,13 @@ public class WebSocketServer {
 
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
-        sessionMap.put(username, session);
 
-        JSONObject result = new JSONObject();
-
-        JSONArray jsonArray = new JSONArray();
-        result.put("users", jsonArray);
-        sessionMap.keySet().stream().forEach(key -> {
-            jsonArray.add(new JSONObject().put("username", key));
-
-        });
-        /*
-            user=[{"username":"yasuo"},{"username":"yone"}]
-         */
-        sendAllMessage(result.toJSONString());
     }
 
 
     @OnClose
-    public void onClose(Session sesinon, @PathParam("username") String username) {
-        sessionMap.remove(username);
+    public void onClose(Session session, @PathParam("username") String username) {
+
     }
 
 
@@ -64,6 +51,4 @@ public class WebSocketServer {
             e.printStackTrace();
         }
     }
-
-
 }

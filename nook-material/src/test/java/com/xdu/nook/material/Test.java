@@ -21,4 +21,5 @@ public class Test {
     public void testRocketMQTemplate(){
         rocketMQTemplate.convertAndSend("nook","这是一条简单的消息");
     }
+    // broker(代理，中间商，掮客)
 }

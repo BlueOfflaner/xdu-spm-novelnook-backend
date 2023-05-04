@@ -25,7 +25,6 @@ public class MessageEntity implements Serializable {
 
     private Integer isActive;
 
-
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 

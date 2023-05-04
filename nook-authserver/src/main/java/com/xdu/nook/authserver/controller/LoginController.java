@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -72,6 +73,7 @@ public class LoginController {
                     }else {
                         UserInfoVo userInfoVo = new UserInfoVo();
                         BeanUtils.copyProperties(userBaseInfoDto,userInfoVo);
+
                         return R.ok(userInfoVo);
                     }
                 }

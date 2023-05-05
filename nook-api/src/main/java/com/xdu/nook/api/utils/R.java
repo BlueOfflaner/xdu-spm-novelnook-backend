@@ -1,12 +1,12 @@
 package com.xdu.nook.api.utils;
 
-import com.xdu.nook.api.constant.ERCode;
-import org.apache.http.HttpStatus;
+import com.xdu.nook.api.enums.ERCode;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class R extends HashMap<String, Object> {
+public class R extends HashMap<String, Object> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

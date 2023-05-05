@@ -1,13 +1,7 @@
 package com.xdu.nook.authserver.service.impl;
 
-import com.xdu.nook.api.constant.ERCode;
 import com.xdu.nook.api.constant.RedisIndex;
-import com.xdu.nook.api.utils.R;
-import com.xdu.nook.authserver.dto.UserBaseInfoDto;
 import com.xdu.nook.authserver.service.CheckVerificationCode;
-import com.xdu.nook.authserver.vo.UserInfoVo;
-import org.springframework.beans.BeanUtils;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

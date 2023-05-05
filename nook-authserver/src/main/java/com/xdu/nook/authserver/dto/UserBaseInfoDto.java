@@ -15,5 +15,4 @@ public class UserBaseInfoDto {
     public String name;
     public Date birthday;
     public String email;
-
 }

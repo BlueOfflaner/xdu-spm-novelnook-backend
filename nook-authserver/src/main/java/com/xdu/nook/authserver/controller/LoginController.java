@@ -1,6 +1,6 @@
 package com.xdu.nook.authserver.controller;
 
-import com.xdu.nook.api.constant.ERCode;
+import com.xdu.nook.api.enums.ERCode;
 import com.xdu.nook.api.constant.RedisIndex;
 import com.xdu.nook.api.utils.R;
 
@@ -9,7 +9,6 @@ import com.xdu.nook.authserver.dto.UserBaseInfoDto;
 import com.xdu.nook.authserver.feign.UserClient;
 import com.xdu.nook.authserver.service.CheckVerificationCode;
 import com.xdu.nook.authserver.service.SendCodeService;
-import com.xdu.nook.authserver.service.impl.CheckVerificationCodeImpl;
 import com.xdu.nook.authserver.vo.UserInfoVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 

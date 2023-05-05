@@ -24,8 +24,5 @@ public class EmailController {
         R send = emailService.send(sendInfo);
         return send;
     }
-    @GetMapping("/test")
-    public void test(){
-        System.out.println("测试通过");
-    }
+
 }

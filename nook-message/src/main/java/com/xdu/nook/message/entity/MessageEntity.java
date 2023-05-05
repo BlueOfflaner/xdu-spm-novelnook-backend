@@ -1,7 +1,9 @@
 package com.xdu.nook.message.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
@@ -12,7 +14,6 @@ import lombok.Data;
 @TableName(value ="message")
 @Data
 public class MessageEntity implements Serializable {
-    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Long src;
@@ -25,10 +26,10 @@ public class MessageEntity implements Serializable {
 
     private Integer isActive;
 
-    @TableField(fill = FieldFill.INSERT)
+    private String callNumber;
+
     private Date createTime;
 
-    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;

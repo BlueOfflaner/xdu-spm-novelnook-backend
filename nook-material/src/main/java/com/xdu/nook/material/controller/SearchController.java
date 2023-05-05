@@ -2,7 +2,7 @@ package com.xdu.nook.material.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xdu.nook.api.constant.ERCode;
+import com.xdu.nook.api.enums.ERCode;
 import com.xdu.nook.api.utils.R;
 import com.xdu.nook.material.entity.*;
 import com.xdu.nook.material.service.*;

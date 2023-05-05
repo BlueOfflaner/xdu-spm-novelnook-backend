@@ -1,4 +1,4 @@
-package com.xdu.nook.api.constant;
+package com.xdu.nook.api.enums;
 
 public enum ERCode {
     /**

@@ -43,12 +43,6 @@ public class WebSocketServer {
 
 
     private void sendAllMessage(String message_json) {
-        try {
-            for (Session session : sessionMap.values()) {
-                session.getBasicRemote().sendText(message_json);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 }

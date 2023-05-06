@@ -11,6 +11,8 @@ import lombok.Data;
 /**
  * @TableName message
  */
+
+
 @TableName(value ="message")
 @Data
 public class MessageEntity implements Serializable {

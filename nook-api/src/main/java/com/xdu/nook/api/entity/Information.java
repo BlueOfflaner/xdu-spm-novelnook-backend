@@ -18,4 +18,5 @@ public class Information {
     private InformationType type;
     private Integer advice;
     private InformationSrc src;
+
 }

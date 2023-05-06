@@ -6,6 +6,7 @@ import com.xdu.nook.api.enums.ERCode;
 import com.xdu.nook.api.utils.R;
 import com.xdu.nook.material.entity.*;
 import com.xdu.nook.material.service.*;
+import com.xdu.nook.material.vo.CategoryListVo;
 import com.xdu.nook.material.vo.NavigationListVo;
 import com.xdu.nook.material.vo.SearchMaterialVo;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -108,5 +109,14 @@ public class SearchController {
             searchMaterialVoL.add(searchMaterialVo);
         });
         return R.ok(searchMaterialVoL);
+    }
+
+    @GetMapping("/get-category-all")
+    public R getCategoryList() {
+        List<CategoryListVo> categoryList = categoryService.getCategoryList();
+        if (categoryList == null) {
+            return R.error(ERCode.SEARCH_NAVIGATION_ERR);
+        }
+        return R.ok(categoryList);
     }
 }

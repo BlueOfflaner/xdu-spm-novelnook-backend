@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -17,6 +19,7 @@ public class CategoryEntity implements Serializable {
 
     private String name;
 
+    @JsonProperty("pId")
     private Long pId;
 
     private Integer level;

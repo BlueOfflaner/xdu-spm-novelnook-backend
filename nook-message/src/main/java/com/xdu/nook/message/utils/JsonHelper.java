@@ -2,14 +2,8 @@ package com.xdu.nook.message.utils;
 
 import com.xdu.nook.api.entity.Information;
 import com.xdu.nook.api.entity.PostScript;
-import com.xdu.nook.api.enums.InformationSrc;
-import com.xdu.nook.api.enums.InformationType;
+import com.xdu.nook.api.utils.JsonUtils;
 import com.xdu.nook.message.entity.MessageEntity;
-
-import javax.validation.constraints.NotNull;
-
-import static com.xdu.nook.api.utils.JsonUtils.jsonToObject;
-import static com.xdu.nook.api.utils.JsonUtils.objectToJson;
 
 public class JsonHelper {
 
@@ -20,7 +14,7 @@ public class JsonHelper {
      */
     public static PostScript getPostScript(MessageEntity message) {
         String postScriptJson = message.getPostscript();
-        return jsonToObject(postScriptJson, PostScript.class);
+        return JsonUtils.jsonToObject(postScriptJson, PostScript.class);
     }
 
     /**
@@ -29,27 +23,10 @@ public class JsonHelper {
      * @param informationJson json字串
      */
     public static Information getInformation(String informationJson) {
-        return jsonToObject(informationJson, Information.class);
+        return JsonUtils.jsonToObject(informationJson, Information.class);
     }
 
-    /**
-     * 组装informationJson
-     */
-    public static String makeInformationJson(@NotNull MessageEntity message, InformationType type,
-                                             InformationSrc src, Integer advice) {
-        Long userId = message.getSrc();
-        Long materialId = message.getMaterialId();
-        String callNumber = message.getCallNumber();
-        Information information = Information.builder()
-                .userId(userId)
-                .materialId(materialId)
-                .callNumber(callNumber)
-                .type(type)
-                .advice(advice)
-                .src(src)
-                .build();
-        return objectToJson(information);
-    }
+
 
 
 }

@@ -9,6 +9,7 @@ import com.xdu.nook.user.dto.RegistDto;
 import com.xdu.nook.user.dto.UserBaseInfoDto;
 import com.xdu.nook.user.entity.BaseInfo;
 import com.xdu.nook.user.entity.SysInfo;
+import com.xdu.nook.user.entity.User;
 import com.xdu.nook.user.service.BaseInfoService;
 import com.xdu.nook.user.service.SysInfoService;
 import com.xdu.nook.user.service.UserService;
@@ -32,14 +33,14 @@ public class AgentController {
     @Resource
     BaseInfoService baseInfoService;
 
-    @ResponseBody
+
     @PostMapping("/welcome")
     public UserBaseInfoDto welcomeUser(@RequestBody RegistDto registDto) {
         UserBaseInfoDto userBaseInfoDto = userService.welcomeUser(registDto.getEmail(), registDto.getPassword());
         return userBaseInfoDto;
     }
 
-    @ResponseBody
+
     @GetMapping("/get-user-info")
     public R getOneUser(@RequestParam String id) {
         UserInfoVo userInfoVo = userService.getOneUser(Long.valueOf(id));
@@ -78,7 +79,7 @@ public class AgentController {
     }
 
 
-    @ResponseBody
+
     @PostMapping("/password/login")
     public UserBaseInfoDto loginWithPassword(@RequestParam String email
             , @RequestParam String password) {
@@ -94,5 +95,14 @@ public class AgentController {
         BeanUtils.copyProperties(baseInfoByUserId, userBaseInfoDto);
         userBaseInfoDto.setUKIDCode(baseInfoByUserId.getUKIDCode());
         return userBaseInfoDto;
+    }
+
+
+    @GetMapping("/check-is-admin")
+    public boolean checkIsAdmin(Long userId){
+        User user = userService.getById(userId);
+        if(user==null)return false;
+        SysInfo sysInfoByUserId = sysInfoService.getSysInfoByUserId(userId);
+        return sysInfoByUserId.getPermission()<=2;
     }
 }

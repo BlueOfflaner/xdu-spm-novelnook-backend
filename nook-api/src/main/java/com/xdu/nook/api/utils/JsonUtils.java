@@ -3,10 +3,6 @@ package com.xdu.nook.api.utils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.xdu.nook.api.entity.Information;
-import com.xdu.nook.api.entity.PostScript;
-import com.xdu.nook.api.enums.InformationSrc;
-import com.xdu.nook.api.enums.InformationType;
 
 public class JsonUtils {
 
@@ -33,6 +29,7 @@ public class JsonUtils {
      */
     public static <T> T jsonToObject(String json, Class<T> clazz) throws JSONException {
         T obj = null;
+        //TODO 此处有可改进之处
         try {
             obj = JSON.parseObject(json, clazz);
         } catch (JSONException e) {
@@ -41,19 +38,6 @@ public class JsonUtils {
         return obj;
     }
 
-    /**
-     * 将json字串转换为JSONObject
-     *
-     * @param json json字串
-     */
-    public static JSONObject jsonToJSONObject(String json) {
-        try {
-            return JSON.parseObject(json);
-        } catch (JSONException e) {
-            System.err.println("Failed to convert json to JSONObject: " + e.getMessage());
-            return null;
-        }
-    }
 
 
 }

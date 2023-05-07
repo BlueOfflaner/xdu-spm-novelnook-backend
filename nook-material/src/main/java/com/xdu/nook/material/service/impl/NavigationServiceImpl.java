@@ -56,7 +56,7 @@ public class NavigationServiceImpl extends ServiceImpl<NavigationMapper, Navigat
 
 
     private List<NavigationListVo> bfs(List<NavigationEntity> allList) {
-        //TODO 要点1
+
         int maxLevel = allList.stream()
                 .map(NavigationEntity::getLevel)
                 .reduce(0, (max, level) -> {
@@ -64,18 +64,18 @@ public class NavigationServiceImpl extends ServiceImpl<NavigationMapper, Navigat
                 });
         List<List<NavigationListVo>> buckets = new ArrayList<>();
 
-        //TODO 要点2
+
         for (int i = 0; i < maxLevel + 1; i++) {
             buckets.add(new ArrayList<NavigationListVo>());
         }
-        //TODO 要点3
+
         allList.forEach(item -> {
             Integer level = item.getLevel();
             NavigationListVo navigationListVo_tmp = new NavigationListVo();
             BeanUtils.copyProperties(item, navigationListVo_tmp);
             buckets.get(level).add(navigationListVo_tmp);
         });
-        //TODO 要点4
+
         //挨个处理每个桶和前面的桶
         for (int i = maxLevel; i > 0; i--) {
             List<NavigationListVo> bucket_current = buckets.get(i);

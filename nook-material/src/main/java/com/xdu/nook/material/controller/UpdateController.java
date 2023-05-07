@@ -52,7 +52,6 @@ public class UpdateController {
         return R.ok(isbnInfo);
     }
 
-    //TODO 事务控制
     @PostMapping("/insert-material")
     public R insertMaterial(@RequestBody MaterialInitialVo materialInitialVo) {
         String isbn = materialInitialVo.getIsbnid();

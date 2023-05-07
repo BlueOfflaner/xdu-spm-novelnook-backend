@@ -1,5 +1,6 @@
 package com.xdu.nook.message.service;
 
+import com.xdu.nook.api.entity.Information;
 import com.xdu.nook.message.entity.MessageEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -10,4 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface MessageService extends IService<MessageEntity> {
 
+    void persist(MessageEntity msg);
+
+    Information generateInformation(MessageEntity message);
 }

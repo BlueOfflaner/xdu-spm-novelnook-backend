@@ -1,11 +1,11 @@
 package com.xdu.nook.message.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -16,6 +16,7 @@ import lombok.Data;
 @TableName(value ="message")
 @Data
 public class MessageEntity implements Serializable {
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     private Long src;
@@ -30,9 +31,11 @@ public class MessageEntity implements Serializable {
 
     private String callNumber;
 
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
-
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
+
 }

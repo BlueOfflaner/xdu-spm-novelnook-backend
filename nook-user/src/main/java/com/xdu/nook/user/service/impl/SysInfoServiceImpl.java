@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class SysInfoServiceImpl extends ServiceImpl<SysInfoMapper, SysInfo> implements SysInfoService {
 
-    //TODO 将
+
     public void modifyStatus(String email, Integer permission, Integer isAvailable) {
 
 

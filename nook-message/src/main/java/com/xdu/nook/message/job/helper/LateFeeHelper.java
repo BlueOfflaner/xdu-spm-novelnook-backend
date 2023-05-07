@@ -1,32 +1,22 @@
-package com.xdu.nook.message.test.comprehensive;
+package com.xdu.nook.message.job.helper;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xdu.nook.message.feign.UserClient;
 import com.xdu.nook.message.mq.Producer;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class JobTest {
-
+public class LateFeeHelper {
     @Resource
     UserClient userClient;
 
     @Resource
     Producer producer;
 
-    @Test
-    public void run() {
-        test();
-    }
-
+    /**
+     * 遍历每一个正在借书的人，并且尝试处理其借书记录表
+     */
     public void test() {
         String jsonString = userClient.getUserDetailedInfo();
         JSONArray userDetailedInfo = JSONArray.parseArray(jsonString);

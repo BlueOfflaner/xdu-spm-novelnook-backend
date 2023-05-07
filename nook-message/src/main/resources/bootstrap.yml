@@ -1,4 +1,3 @@
-
 spring:
   application:
     name: nook-message
@@ -13,6 +12,5 @@ spring:
         namespace: ed1d4e9a-03c6-4370-9ada-b939535246eb
       # ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
       # nook-material-dev.yaml
-
 
 
